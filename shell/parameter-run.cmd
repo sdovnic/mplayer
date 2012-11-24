@@ -30,8 +30,19 @@ rem -fs -zoom -quiet -vo xv -vc ffvc1 -fps 24000/1001 -lavdopts threads=2:fast:s
 rem -fs -zoom -x 1280 -y 720 -quiet -vo xv -vc ffvc1 -fps 24000/1001 -lavdopts threads=2:fast:skiploopfilter=all -sws 0 -framedrop -ni -cache 9999
 
 rem "%mplayer%\mplayer\mplayer.exe" -fs -zoom -quiet -sws 0 -fps 24000/1001 -lavdopts threads=2:fast:skiploopfilter=all -ni -framedrop -cache 9999 "%~s1"
+rem 3D = -vo vdpaustereo -vc ffh264vdpau,ffmpeg12vdpau,ffvc1vdpau,ffwmv3vdpau
+rem -vf stereo3d=sbsl:arcg
+rem -vo gl:stereo=3
+rem stereo=<n>
+rem   0: normal display
+rem   1: side-by-side to red-cyan stereo
+rem   2: side-by-side to green-magenta stereo
+rem   3: side-by-side to quadbuffer stereo
 
-"%mplayer%\mplayer\mplayer.exe" -loop 0 -fs -zoom -quiet -volume 0 -ss 00:00:07 %~s1
+
+"%mplayer%\mplayer\mplayer.exe" -ass %~s1
+rem -vo gl:stereo=3 %~s1
+rem -loop 0 -fs -zoom -quiet -volume 0 -ss 00:00:07 %~s1
 rem -ao pcm -vo null %1
 rem -identify -frames 0 -vo null -ao null %1
 
