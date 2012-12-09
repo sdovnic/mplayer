@@ -11,7 +11,7 @@ Dim strExtension, strExtensionPlaylist
 Dim arrExtensions, arrExtensionsPlaylist
 
 ' File Extensions
-arrExtensions = Array("m4r", "au", "ac3", "asf", "aac", "mkv", "m4a", "mp3", "m2v", "ogv", "ogg", "ogm", "wav", "webm", "weba", "avi", "mp4", "divx", "m4v", "mpg", "mpeg", "wmv", "wma", "flv", "mov", "flac", "m4b", "3gp", "m2ts", "ts", "dts")
+arrExtensions = Array("mka", "bik", "evo", "vob", "m4r", "au", "ac3", "asf", "aac", "mkv", "m4a", "mp3", "m2v", "ogv", "ogg", "ogm", "wav", "webm", "weba", "avi", "mp4", "divx", "m4v", "mpg", "mpeg", "wmv", "wma", "flv", "mov", "flac", "m4b", "3gp", "m2ts", "ts", "dts")
 arrExtensionsPlaylist = Array("m3u", "m3u8", "pls")
 
 ' MPlayer Directory
