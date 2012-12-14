@@ -47,6 +47,10 @@ objShell.RegDelete strRegistry & "shell\unicode-play\command\"
 objShell.RegDelete strRegistry & "shell\unicode-play\"
 objShell.RegDelete strRegistry & "shell\switch-sid-aid\command\"
 objShell.RegDelete strRegistry & "shell\switch-sid-aid\"
+objShell.RegDelete strRegistry & "shell\3d-half-sbs\command\"
+objShell.RegDelete strRegistry & "shell\3d-half-sbs\"
+objShell.RegDelete strRegistry & "shell\3d-full-sbs\command\"
+objShell.RegDelete strRegistry & "shell\3d-full-sbs\"
 objShell.RegDelete strRegistry & "shell\"
 objShell.RegDelete strRegistry
 

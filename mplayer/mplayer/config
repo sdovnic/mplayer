@@ -56,6 +56,8 @@ ass-styles="F:\mplayer\mplayer\mplayer\styles.ass"
 # Für nur AC3, benutze ac=hwac3,
 # Für nur DTS, benutze ac=hwdts,
 # Für AC3 und DTS, benutze afm=hwac3
+#afm=hwac3,hwdts,ffmlp
+#ac=hwac3,hwdts,ffmlp
 
 # AC3 zu Stereo
 # -channels 2 -af volume=40

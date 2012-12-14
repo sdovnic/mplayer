@@ -112,6 +112,10 @@ objShell.RegWrite strRegistry & "shell\unicode-play\", "Datei mit Sonderzeichen"
 objShell.RegWrite strRegistry & "shell\unicode-play\command\", strDirectory & "\shell\unicode-play.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\switch-sid-aid\", "Tonspur und Untertitel wechseln"
 objShell.RegWrite strRegistry & "shell\switch-sid-aid\command\", strDirectory & "\mplayer\mplayer.exe -sid 0 -aid 1 " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\3d-half-sbs\", "3D Half Side-by-Side"
+objShell.RegWrite strRegistry & "shell\3d-half-sbs\command\", strDirectory & "\shell\3d-half-sbs.cmd " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\3d-full-sbs\", "3D Full Side-by-Side"
+objShell.RegWrite strRegistry & "shell\3d-full-sbs\command\", strDirectory & "\shell\3d-full-sbs.cmd " & chr(34) & "%1" & chr(34)
 
 ' Registry Path for Playlist
 strRegistry = "HKEY_CURRENT_USER\Software\Classes\playlist.cmd\"
