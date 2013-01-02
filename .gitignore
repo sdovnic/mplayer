@@ -165,4 +165,5 @@ pip-log.txt
 # AVDump2
 avdump2/done.txt
 avdump2/ed2k.txt
+shell/av2dump.ini
 
