@@ -1,22 +1,18 @@
-MPlayer/MEncoder Win32 binary Builds by Gianluigi Tiesi <sherpya@netfarm.it>
+MPlayer/MEncoder Win32 binary Builds by Redxii <redxii@users.sourceforge.net> for SMPlayer
+Report bugs to http://smplayer.sf.net/
 
 The included subfont.ttf is DejaVu Serif,
 Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
 a trademark of Bitstream, Inc.
 DejaVu changes are in public domain.
 
-Additionally were added some patches from me, and other picked around internet.
-For information about included patches please look at:
+Some libraries are from Gianluigi Tiesi [sherpya@netfarm.it] Mplayer for Windows:
+libSDL-mingw32-1.2.15-gcc46.tar.bz2
+
+For information about included libraries please look at:
 http://oss.netfarm.it/mplayer-win32.php
 
-Modified windows icons are made by using Lila SVG Icon and Theme Artwork:
-http://www.lila-center.info/doku.php
-Copyright 2004-2006 Lila Community
-available under the GNU General Public License
 
--- Report bugs to sherpya@netfarm.it
-
---
 The bottom of this file has a list of keyboard shortcuts to control MPlayer.
 A complete list of command line parameters is in mplayer.html. More
 documentation is in the docs/ directory. Start reading at index.html or
@@ -28,26 +24,21 @@ most things are valid for Windows as well.
 The files in this package:
 mplayer.exe   - the main executable
 mencoder.exe  - a full-featured video encoder
-vfw2menc.exe  - a tool used to configure VfW codecs, please look at
-                docs/menc-feat-video-for-windows.html
 mplayer.html  - usage and command line options
-AUTHORS.txt   - (incomplete) authors list
-Changelog.txt - a list of the most important changes between versions
-Copyright.txt - copyright information for imported libraries
 LICENSE.txt   - a copy of the GNU General Public License (GNU GPL)
 README.txt    - this document
 codecs/       - binary codecs (Real, QuickTime etc.) directory;
-                You can download some codecs from our downlad page:
+                You can download some codecs from our download page:
                 http://www.mplayerhq.hu/design7/dload.html
 
 mplayer/config      - configuration file with adjustable options
 mplayer/input.conf  - keybinding configuration file
 
 A list of Windows frontends for MPlayer can be found at
-http://www.mplayerhq.hu/homepage/design7/projects.html#windows
+http://www.mplayerhq.hu/design7/projects.html
 
 A mailing list for Windows-related questions is at
-http://lists.mplayerhq.hu/mailman/listinfo/mplayer-cygwin
+http://lists.mplayerhq.hu/mailman/listinfo/mplayer-users
 
 
 KEYBOARD CONTROL
