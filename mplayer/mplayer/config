@@ -31,7 +31,7 @@ dr=no
 vf=screenshot
 
 # Enable colored console output
-#msgcolor=yes
+msgcolor=yes
 
 cache=8192 
 
@@ -39,7 +39,7 @@ slang=ger,eng,und
 alang=ger,jpn,eng,und
 
 monitoraspect=1920/1080
-#menu=yes
+menu=yes
 
 # vo=directx is the default for pre-Vista OSes
 # vo=gl:yuv=2 is the default for Vista+
@@ -67,7 +67,7 @@ channels=2
 # Software Volume or softvol adjusts you volume using software amplification, 
 # not your sound cards hardware volume
 softvol=1
-softvol-max=500
+softvol-max=1000
 
 # Fit to Screen w and e key
 #panscan=1.0

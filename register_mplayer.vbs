@@ -106,6 +106,8 @@ objShell.RegWrite strRegistry & "shell\extract-mp3\", "Audio zu MP3 extrahieren"
 objShell.RegWrite strRegistry & "shell\extract-mp3\command\", strDirectory & "\shell\ffmpeg-mp3.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\extract-aac\", "Audio zu AAC extrahieren"
 objShell.RegWrite strRegistry & "shell\extract-aac\command\", strDirectory & "\shell\ffmpeg-aac.cmd " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\extract-ogg\", "Audio zu OGG extrahieren"
+objShell.RegWrite strRegistry & "shell\extract-ogg\command\", strDirectory & "\shell\ffmpeg-ogg.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\avdump2\", "AniDB Information"
 objShell.RegWrite strRegistry & "shell\avdump2\command\", strDirectory & "\shell\avdump2.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\unicode-play\", "Datei mit Sonderzeichen"
