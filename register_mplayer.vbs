@@ -26,7 +26,7 @@ strDirectory = objFileSystem.GetParentFolderName(objFile)
 
 ' Set Variables in Shell Files
 Dim arrShells, strShell
-arrShells = Array("unicode-play", "playlist", "playlist-audio", "playlist-video", "parameter", "parameter-run", "ffmpeg-mp3", "ffmpeg-aac", "avdump2")
+arrShells = Array("3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play")
 
 Const Read = 1
 Const Write = 2

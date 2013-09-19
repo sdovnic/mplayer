@@ -39,7 +39,7 @@ slang=ger,eng,und
 alang=ger,jpn,eng,und
 
 monitoraspect=1920/1080
-menu=yes
+#menu=yes
 
 # vo=directx is the default for pre-Vista OSes
 # vo=gl:yuv=2 is the default for Vista+
