@@ -39,8 +39,7 @@ rem   1: side-by-side to red-cyan stereo
 rem   2: side-by-side to green-magenta stereo
 rem   3: side-by-side to quadbuffer stereo
 
-
-"%mplayer%\mplayer\mplayer.exe" %~s1 -aspect 16:9
+"%mplayer%\mplayer\mplayer.exe" %1 -aspect 16:9 -vo gl:stereo=3
 rem -vo gl:stereo=1 %~s1
 rem -vo gl:stereo=3 %~s1
 rem -loop 0 -fs -zoom -quiet -volume 0 -ss 00:00:07 %~s1

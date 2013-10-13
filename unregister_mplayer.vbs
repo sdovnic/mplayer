@@ -1,5 +1,8 @@
 Option Explicit
 
+Dim strVersion
+strVersion = "13.10.2013"
+
 Dim objShell
 Set objShell = CreateObject("WScript.Shell")
 
@@ -88,4 +91,4 @@ Set objFile = objFileSystem.GetFile(strFolder + "\MPlayer - Movie Player.lnk")
 objFile.Delete
 
 ' Message Box
-MsgBox "MPlayer - Movie Player successfully uninstalled!", 64, "MPlayer - Movie Player Uninstaller"
+MsgBox "MPlayer - Movie Player successfully uninstalled!", 64, "MPlayer - Movie Player Uninstaller (" & strVersion & ")"
