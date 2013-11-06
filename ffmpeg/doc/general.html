@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- Created on September 14, 2013 by texi2html 1.82 -->
+<!-- Created on November 4, 2013 by texi2html 1.82 -->
 <!--
 texi2html was written by: 
             Lionel Cons <Lionel.Cons@cern.ch> (original author)
@@ -16,8 +16,6 @@ Send bugs and suggestions to <texi2html-bug@nongnu.org>
 
 <meta name="description" content="General Documentation: ">
 <meta name="keywords" content="FFmpeg documentation : General ">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
 <meta name="Generator" content="texi2html 1.82">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="default.css" />
@@ -26,6 +24,7 @@ Send bugs and suggestions to <texi2html-bug@nongnu.org>
 </head>
 <body>
 <div id="container">
+<div id="body">
 
 <a name="SEC_Top"></a>
 <h1 class="settitle">General Documentation</h1>
@@ -162,7 +161,7 @@ Then pass <code>--enable-libtwolame</code> to configure to enable it.
 <a name="libvpx"></a>
 <h2 class="section"><a href="general.html#toc-libvpx">1.5 libvpx</a></h2>
 
-<p>FFmpeg can make use of the libvpx library for VP8 encoding.
+<p>FFmpeg can make use of the libvpx library for VP8/VP9 encoding.
 </p>
 <p>Go to <a href="http://www.webmproject.org/">http://www.webmproject.org/</a> and follow the instructions for
 installing the library. Then pass <code>--enable-libvpx</code> to configure to
@@ -290,6 +289,7 @@ library:
 <tr><td width="40%">GIF Animation</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">GXF</td><td width="10%">X</td><td width="10%">X</td><td width="40%">General eXchange Format SMPTE 360M, used by Thomson Grass Valley
          playout servers.</td></tr>
+<tr><td width="40%">HNM</td><td width="10%"></td><td width="10%">X</td><td width="40%">Only version 4 supported, used in some games from Cryo Interactive</td></tr>
 <tr><td width="40%">iCEDraw File</td><td width="10%"></td><td width="10%">X</td></tr>
 <tr><td width="40%">ICO</td><td width="10%">X</td><td width="10%">X</td><td width="40%">Microsoft Windows ICO</td></tr>
 <tr><td width="40%">id Quake II CIN video</td><td width="10%"></td><td width="10%">X</td></tr>
@@ -355,6 +355,7 @@ library:
 <tr><td width="40%">raw H.261</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">raw H.263</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">raw H.264</td><td width="10%">X</td><td width="10%">X</td></tr>
+<tr><td width="40%">raw HEVC</td><td width="10%"></td><td width="10%">X</td></tr>
 <tr><td width="40%">raw Ingenient MJPEG</td><td width="10%"></td><td width="10%">X</td></tr>
 <tr><td width="40%">raw MJPEG</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">raw MLP</td><td width="10%"></td><td width="10%">X</td></tr>
@@ -470,6 +471,7 @@ following image formats are supported:
 <tr><td width="40%">Sun Rasterfile</td><td width="10%">X</td><td width="10%">X</td><td width="40%">Sun RAS image format</td></tr>
 <tr><td width="40%">TIFF</td><td width="10%">X</td><td width="10%">X</td><td width="40%">YUV, JPEG and some extension is not supported yet.</td></tr>
 <tr><td width="40%">Truevision Targa</td><td width="10%">X</td><td width="10%">X</td><td width="40%">Targa (.TGA) image format</td></tr>
+<tr><td width="40%">WebP</td><td width="10%"></td><td width="10%">X</td><td width="40%">WebP image format</td></tr>
 <tr><td width="40%">XBM</td><td width="10%">X</td><td width="10%">X</td><td width="40%">X BitMap image format</td></tr>
 <tr><td width="40%">XFace</td><td width="10%">X</td><td width="10%">X</td><td width="40%">X-Face image format</td></tr>
 <tr><td width="40%">XWD</td><td width="10%">X</td><td width="10%">X</td><td width="40%">X Window Dump image format</td></tr>
@@ -551,6 +553,8 @@ following image formats are supported:
 <tr><td width="40%">H.263 / H.263-1996</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">H.263+ / H.263-1998 / H.263 version 2</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</td><td width="10%">E</td><td width="10%">X</td><td width="40%">encoding supported through external library libx264</td></tr>
+<tr><td width="40%">HEVC</td><td width="10%"></td><td width="10%">X</td></tr>
+<tr><td width="40%">HNM version 4</td><td width="10%"></td><td width="10%">X</td></tr>
 <tr><td width="40%">HuffYUV</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">HuffYUV FFmpeg variant</td><td width="10%">X</td><td width="10%">X</td></tr>
 <tr><td width="40%">IBM Ultimotion</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourcc: ULTI</td></tr>
@@ -598,6 +602,7 @@ following image formats are supported:
 <tr><td width="40%">On2 VP5</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourcc: VP50</td></tr>
 <tr><td width="40%">On2 VP6</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourcc: VP60,VP61,VP62</td></tr>
 <tr><td width="40%">VP8</td><td width="10%">E</td><td width="10%">X</td><td width="40%">fourcc: VP80, encoding supported through external library libvpx</td></tr>
+<tr><td width="40%">VP9</td><td width="10%">E</td><td width="10%">X</td><td width="40%">encoding supported through external library libvpx</td></tr>
 <tr><td width="40%">Pinnacle TARGA CineWave YUV16</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourcc: Y216</td></tr>
 <tr><td width="40%">Prores</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourcc: apch,apcn,apcs,apco</td></tr>
 <tr><td width="40%">Q-team QPEG</td><td width="10%"></td><td width="10%">X</td><td width="40%">fourccs: QPEG, Q1.0, Q1.1</td></tr>
@@ -913,4 +918,4 @@ performance on systems without hardware floating point support).
 </table>
 
 <footer class="footer pagination-right">
-<span class="label label-info">This document was generated by <em>sherpya</em> on <em>September 14, 2013</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.</span></footer></div>
+<span class="label label-info">This document was generated by <em>sherpya</em> on <em>November 4, 2013</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.</span></footer></div></div></body>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- Created on September 14, 2013 by texi2html 1.82 -->
+<!-- Created on November 4, 2013 by texi2html 1.82 -->
 <!--
 texi2html was written by: 
             Lionel Cons <Lionel.Cons@cern.ch> (original author)
@@ -16,8 +16,6 @@ Send bugs and suggestions to <texi2html-bug@nongnu.org>
 
 <meta name="description" content="ffmpeg Documentation: ">
 <meta name="keywords" content="FFmpeg documentation : ffmpeg ">
-<meta name="resource-type" content="document">
-<meta name="distribution" content="global">
 <meta name="Generator" content="texi2html 1.82">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="default.css" />
@@ -26,6 +24,7 @@ Send bugs and suggestions to <texi2html-bug@nongnu.org>
 </head>
 <body>
 <div id="container">
+<div id="body">
 
 <a name="SEC_Top"></a>
 <h1 class="settitle">ffmpeg Documentation</h1>
@@ -60,12 +59,12 @@ Send bugs and suggestions to <texi2html-bug@nongnu.org>
     <li><a name="toc-Subtitle-options_003a" href="#Subtitle-options_003a">5.9 Subtitle options:</a></li>
     <li><a name="toc-Advanced-Subtitle-options_003a" href="#Advanced-Subtitle-options_003a">5.10 Advanced Subtitle options:</a></li>
     <li><a name="toc-Advanced-options" href="#Advanced-options">5.11 Advanced options</a></li>
-    <li><a name="toc-Preset-files" href="#Preset-files">5.12 Preset files</a></li>
+    <li><a name="toc-Preset-files-1" href="#Preset-files-1">5.12 Preset files</a></li>
   </ul></li>
   <li><a name="toc-Tips" href="#Tips">6. Tips</a></li>
   <li><a name="toc-Examples" href="#Examples">7. Examples</a>
   <ul class="toc">
-    <li><a name="toc-Preset-files-1" href="#Preset-files-1">7.1 Preset files</a></li>
+    <li><a name="toc-Preset-files" href="#Preset-files">7.1 Preset files</a></li>
     <li><a name="toc-Video-and-Audio-grabbing" href="#Video-and-Audio-grabbing">7.2 Video and Audio grabbing</a></li>
     <li><a name="toc-X11-grabbing" href="#X11-grabbing">7.3 X11 grabbing</a></li>
     <li><a name="toc-Video-and-Audio-file-format-conversion" href="#Video-and-Audio-file-format-conversion">7.4 Video and Audio file format conversion</a></li>
@@ -341,10 +340,20 @@ program.
 </dd>
 <dt> &lsquo;<samp>-h, -?, -help, --help [<var>arg</var>]</samp>&rsquo;</dt>
 <dd><p>Show help. An optional parameter may be specified to print help about a specific
-item.
+item. If no argument is specified, only basic (non advanced) tool
+options are shown.
 </p>
 <p>Possible values of <var>arg</var> are:
 </p><dl compact="compact">
+<dt> &lsquo;<samp>long</samp>&rsquo;</dt>
+<dd><p>Print advanced tool options in addition to the basic tool options.
+</p>
+</dd>
+<dt> &lsquo;<samp>full</samp>&rsquo;</dt>
+<dd><p>Print complete list of options, including shared and private options
+for encoders, decoders, demuxers, muxers, filters, etc.
+</p>
+</dd>
 <dt> &lsquo;<samp>decoder=<var>decoder_name</var></samp>&rsquo;</dt>
 <dd><p>Print detailed information about the decoder named <var>decoder_name</var>. Use the
 &lsquo;<samp>-decoders</samp>&rsquo; option to get a list of all decoders.
@@ -368,8 +377,7 @@ item.
 <dt> &lsquo;<samp>filter=<var>filter_name</var></samp>&rsquo;</dt>
 <dd><p>Print detailed information about the filter name <var>filter_name</var>. Use the
 &lsquo;<samp>-filters</samp>&rsquo; option to get a list of all filters.
-</p>
-</dd>
+</p></dd>
 </dl>
 
 </dd>
@@ -418,6 +426,10 @@ for what is more correctly called a media bitstream format.
 </dd>
 <dt> &lsquo;<samp>-layouts</samp>&rsquo;</dt>
 <dd><p>Show channel names and standard channel layouts.
+</p>
+</dd>
+<dt> &lsquo;<samp>-colors</samp>&rsquo;</dt>
+<dd><p>Show recognized color names.
 </p>
 </dd>
 <dt> &lsquo;<samp>-loglevel [repeat+]<var>loglevel</var> | -v [repeat+]<var>loglevel</var></samp>&rsquo;</dt>
@@ -588,14 +600,15 @@ muxer:
 </p><table><tr><td>&nbsp;</td><td><pre class="example">ffmpeg -i input.flac -id3v2_version 3 out.mp3
 </pre></td></tr></table>
 
-<p>All codec AVOptions are obviously per-stream, so the chapter on stream
-specifiers applies to them
+<p>All codec AVOptions are per-stream, and thus a stream specifier
+should be attached to them.
 </p>
-<p>Note &lsquo;<samp>-nooption</samp>&rsquo; syntax cannot be used for boolean AVOptions,
-use &lsquo;<samp>-option 0</samp>&rsquo;/&lsquo;<samp>-option 1</samp>&rsquo;.
+<p>Note: the &lsquo;<samp>-nooption</samp>&rsquo; syntax cannot be used for boolean
+AVOptions, use &lsquo;<samp>-option 0</samp>&rsquo;/&lsquo;<samp>-option 1</samp>&rsquo;.
 </p>
-<p>Note2 old undocumented way of specifying per-stream AVOptions by prepending
-v/a/s to the options name is now obsolete and will be removed soon.
+<p>Note: the old undocumented way of specifying per-stream AVOptions by
+prepending v/a/s to the options name is now obsolete and will be
+removed soon.
 </p>
 <a name="Main-options"></a>
 <h2 class="section"><a href="ffmpeg.html#toc-Main-options">5.4 Main options</a></h2>
@@ -1562,8 +1575,8 @@ MPEG-TS format, delaying the subtitles by 1 second:
 <p>(0x2d0, 0x2dc and 0x2ef are the MPEG-TS PIDs of respectively the video,
 audio and subtitles streams; 0:0, 0:3 and 0:7 would have worked too)
 </p>
-<a name="Preset-files"></a>
-<h2 class="section"><a href="ffmpeg.html#toc-Preset-files">5.12 Preset files</a></h2>
+<a name="Preset-files-1"></a>
+<h2 class="section"><a href="ffmpeg.html#toc-Preset-files-1">5.12 Preset files</a></h2>
 <p>A preset file contains a sequence of <var>option</var>=<var>value</var> pairs,
 one for each line, specifying a sequence of options which would be
 awkward to specify on the command line. Lines starting with the hash
@@ -1638,8 +1651,8 @@ quality).
 <a name="Examples"></a>
 <h1 class="chapter"><a href="ffmpeg.html#toc-Examples">7. Examples</a></h1>
 
-<a name="Preset-files-1"></a>
-<h2 class="section"><a href="ffmpeg.html#toc-Preset-files-1">7.1 Preset files</a></h2>
+<a name="Preset-files"></a>
+<h2 class="section"><a href="ffmpeg.html#toc-Preset-files">7.1 Preset files</a></h2>
 
 <p>A preset file contains a sequence of <var>option=value</var> pairs, one for
 each line, specifying a sequence of options which can be specified also on
@@ -1678,13 +1691,13 @@ standard mixer.
 
 <p>Grab the X11 display with ffmpeg via
 </p>
-<table><tr><td>&nbsp;</td><td><pre class="example">ffmpeg -f x11grab -s cif -r 25 -i :0.0 /tmp/out.mpg
+<table><tr><td>&nbsp;</td><td><pre class="example">ffmpeg -f x11grab -video_size cif -framerate 25 -i :0.0 /tmp/out.mpg
 </pre></td></tr></table>
 
 <p>0.0 is display.screen number of your X11 server, same as
 the DISPLAY environment variable.
 </p>
-<table><tr><td>&nbsp;</td><td><pre class="example">ffmpeg -f x11grab -s cif -r 25 -i :0.0+10,20 /tmp/out.mpg
+<table><tr><td>&nbsp;</td><td><pre class="example">ffmpeg -f x11grab -video_size cif -framerate 25 -i :0.0+10,20 /tmp/out.mpg
 </pre></td></tr></table>
 
 <p>0.0 is display.screen number of your X11 server, same as the DISPLAY environment
@@ -1861,4 +1874,4 @@ online repository at <a href="http://source.ffmpeg.org">http://source.ffmpeg.org
 </p>
 
 <footer class="footer pagination-right">
-<span class="label label-info">This document was generated by <em>sherpya</em> on <em>September 14, 2013</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.</span></footer></div>
+<span class="label label-info">This document was generated by <em>sherpya</em> on <em>November 4, 2013</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.</span></footer></div></div></body>

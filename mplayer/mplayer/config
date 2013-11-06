@@ -47,7 +47,7 @@ vo=gl:yuv=2
 #vo=direct3d
 
 # Enable stylized subtitles
-#ass=yes
+ass=yes
 embeddedfonts=yes
 #ass-force-style=Fontname=Calibri,Fontsize=30,PrimaryColour=&H00ffffff,BorderStyle=0
 ass-styles="F:\mplayer\mplayer\mplayer\styles.ass"

@@ -98,8 +98,10 @@ objShell.RegWrite strRegistry & "shell\playlist-audio\", "Playlist Audio"
 objShell.RegWrite strRegistry & "shell\playlist-audio\command\", strDirectory & "\shell\playlist-audio.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\playlist-video\", "Playlist Video"
 objShell.RegWrite strRegistry & "shell\playlist-video\command\", strDirectory & "\shell\playlist-video.cmd " & chr(34) & "%1" & chr(34)
-objShell.RegWrite strRegistry & "shell\ass\", "Karaoke Untertitel"
-objShell.RegWrite strRegistry & "shell\ass\command\", strDirectory & "\mplayer\mplayer.exe -ass " & chr(34) & "%1" & chr(34)
+'objShell.RegWrite strRegistry & "shell\ass\", "Karaoke Untertitel"
+'objShell.RegWrite strRegistry & "shell\ass\command\", strDirectory & "\mplayer\mplayer.exe -ass " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\noass\", "Keine ASS Untertitel"
+objShell.RegWrite strRegistry & "shell\noass\command\", strDirectory & "\mplayer\mplayer.exe -noass " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\reindex\", "Datei mit defektem Index"
 objShell.RegWrite strRegistry & "shell\reindex\command\", strDirectory & "\mplayer\mplayer.exe -idx " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\extract-mp3\", "Audio zu MP3 extrahieren"
