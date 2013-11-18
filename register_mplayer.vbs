@@ -26,7 +26,7 @@ strDirectory = objFileSystem.GetParentFolderName(objFile)
 
 ' Set Variables in Shell Files
 Dim arrShells, strShell
-arrShells = Array("3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play")
+arrShells = Array("3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play", "console")
 
 Const Read = 1
 Const Write = 2
@@ -104,6 +104,8 @@ objShell.RegWrite strRegistry & "shell\noass\", "Keine ASS Untertitel"
 objShell.RegWrite strRegistry & "shell\noass\command\", strDirectory & "\mplayer\mplayer.exe -noass " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\reindex\", "Datei mit defektem Index"
 objShell.RegWrite strRegistry & "shell\reindex\command\", strDirectory & "\mplayer\mplayer.exe -idx " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\console\", "Console"
+objShell.RegWrite strRegistry & "shell\console\command\", strDirectory & "\shell\console.cmd"
 objShell.RegWrite strRegistry & "shell\extract-mp3\", "Audio zu MP3 extrahieren"
 objShell.RegWrite strRegistry & "shell\extract-mp3\command\", strDirectory & "\shell\ffmpeg-mp3.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\extract-aac\", "Audio zu AAC extrahieren"
