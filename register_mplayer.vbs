@@ -26,7 +26,7 @@ strDirectory = objFileSystem.GetParentFolderName(objFile)
 
 ' Set Variables in Shell Files
 Dim arrShells, strShell
-arrShells = Array("3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play", "console")
+arrShells = Array("3d-full-ou", "3d-half-ou", "3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play", "console")
 
 Const Read = 1
 Const Write = 2
@@ -122,6 +122,11 @@ objShell.RegWrite strRegistry & "shell\3d-half-sbs\", "3D Half Side-by-Side"
 objShell.RegWrite strRegistry & "shell\3d-half-sbs\command\", strDirectory & "\shell\3d-half-sbs.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\3d-full-sbs\", "3D Full Side-by-Side"
 objShell.RegWrite strRegistry & "shell\3d-full-sbs\command\", strDirectory & "\shell\3d-full-sbs.cmd " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\3d-half-ou\", "3D Half Over-Under"
+objShell.RegWrite strRegistry & "shell\3d-half-ou\command\", strDirectory & "\shell\3d-half-ou.cmd " & chr(34) & "%1" & chr(34)
+objShell.RegWrite strRegistry & "shell\3d-full-ou\", "3D Full Over-Under"
+objShell.RegWrite strRegistry & "shell\3d-full-ou\command\", strDirectory & "\shell\3d-full-ou.cmd " & chr(34) & "%1" & chr(34)
+
 
 ' Registry Path for Playlist
 strRegistry = "HKEY_CURRENT_USER\Software\Classes\playlist.cmd\"

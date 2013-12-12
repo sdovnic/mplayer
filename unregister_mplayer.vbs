@@ -60,6 +60,10 @@ objShell.RegDelete strRegistry & "shell\3d-half-sbs\command\"
 objShell.RegDelete strRegistry & "shell\3d-half-sbs\"
 objShell.RegDelete strRegistry & "shell\3d-full-sbs\command\"
 objShell.RegDelete strRegistry & "shell\3d-full-sbs\"
+objShell.RegDelete strRegistry & "shell\3d-half-ou\command\"
+objShell.RegDelete strRegistry & "shell\3d-half-ou\"
+objShell.RegDelete strRegistry & "shell\3d-full-ou\command\"
+objShell.RegDelete strRegistry & "shell\3d-full-ou\"
 objShell.RegDelete strRegistry & "shell\"
 objShell.RegDelete strRegistry
 
