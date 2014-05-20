@@ -1,6 +1,5 @@
-MPlayer, Movie Player
-=====================
+# MPlayer, Movie Player
 
-remote origin
--------------
-`ssh://yuumura.digital-nerv.net/home/rvincent/git/mplayer.git`
+## remote origin
+
+    ssh://yuumura.digital-nerv.net/home/rvincent/git/mplayer.git
