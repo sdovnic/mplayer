@@ -1,5 +1,5 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 set str=%1
 set ext=%~x1
 set str=%str:~0,-5%

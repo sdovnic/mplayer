@@ -1,3 +1,3 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 "%mplayer%\mplayer\mplayer.exe" "%~s1"

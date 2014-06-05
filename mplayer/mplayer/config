@@ -38,7 +38,7 @@ cache=8192
 slang=ger,eng,und 
 alang=ger,jpn,eng,und
 
-monitoraspect=1920/1080
+monitoraspect=1680/1050
 #menu=yes
 
 # vo=directx is the default for pre-Vista OSes
@@ -50,7 +50,7 @@ vo=gl:yuv=2
 ass=yes
 embeddedfonts=yes
 #ass-force-style=Fontname=Calibri,Fontsize=30,PrimaryColour=&H00ffffff,BorderStyle=0
-ass-styles="F:\mplayer\mplayer\mplayer\styles.ass"
+ass-styles="C:\Portable\mplayer\mplayer\mplayer\styles.ass"
 
 # Passthrough in der MPlayer-Konfigurationsdatei aktivieren:
 # Für nur AC3, benutze ac=hwac3,

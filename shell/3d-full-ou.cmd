@@ -1,5 +1,5 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 rem arcg anaglyph_red_cyan_gray 
 rem arch anaglyph_red_cyan_half_color 
 rem arcc anaglyph_red_cyan_color 

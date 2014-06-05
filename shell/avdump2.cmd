@@ -1,5 +1,5 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 set ed2k="--Exp=ed2k.txt"
 set done="--Done=done.txt"
 rem rename av2dump.ini.contrib to av2dump.ini

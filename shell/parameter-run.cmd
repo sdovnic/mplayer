@@ -1,5 +1,5 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 
 rem +-----------------------------------------------------------+
 rem |							  	|

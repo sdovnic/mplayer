@@ -1,5 +1,5 @@
 @echo off
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 rem 0 = Normal Display
 rem 1 = Anaglyphic Cyan Magenta
 rem 2 = Anaglyphic Green Magenta

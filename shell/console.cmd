@@ -1,6 +1,6 @@
 @echo off
 setlocal
-set mplayer=F:\mplayer
+set mplayer=C:\Portable\mplayer
 set path=%path%;%mplayer%\mplayer;%mplayer%\ffmpeg;%mplayer%\flac
 %~d1
 cd "%~p1"
