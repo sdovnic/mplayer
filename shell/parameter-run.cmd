@@ -39,7 +39,8 @@ rem   1: side-by-side to red-cyan stereo
 rem   2: side-by-side to green-magenta stereo
 rem   3: side-by-side to quadbuffer stereo
 
-"%mplayer%\mplayer\mplayer.exe" %1 -vo gl_nosw
+"%mplayer%\mplayer\mplayer.exe" %1 -aspect 19:9
+rem -vo gl_nosw
 rem -vf stereo3d=above_below_half_height_left_first:mono_left
 rem -vo gl:stereo=1 %~s1
 rem -vo gl:stereo=3 %~s1
