@@ -38,7 +38,7 @@ cache=8192
 slang=ger,eng,und 
 alang=ger,jpn,eng,und
 
-monitoraspect=1920/1080
+monitoraspect=1680/1050
 #menu=yes
 
 # vo=directx is the default for pre-Vista OSes
