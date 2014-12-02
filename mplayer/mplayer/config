@@ -1,9 +1,12 @@
+[default]
 # Manual available at http://www.mplayerhq.hu/DOCS/man/en/mplayer.1.html
 
 fontconfig=yes
 font=Calibri
+#font="Open Sans"
+#font=Roboto
 #font=Calibri:style=Bold
-subpos=100 
+subpos=100
 subfont-text-scale=3
 
 # Find subtitle files. (1: load all subs containing movie name)
@@ -33,13 +36,15 @@ vf=screenshot
 # Enable colored console output
 msgcolor=yes
 
-cache=8192 
+msglevel=all=4
 
-slang=ger,eng,und 
+cache=8192
+
+slang=ger,eng,und
 alang=ger,jpn,eng,und
 
-monitoraspect=1680/1050
-#menu=yes
+monitoraspect=1920/1080
+menu=no
 
 # vo=directx is the default for pre-Vista OSes
 # vo=gl:yuv=2 is the default for Vista+
@@ -64,10 +69,13 @@ ass-styles="C:\Portable\mplayer\mplayer\mplayer\styles.ass"
 channels=2
 #volume=100
 
-# Software Volume or softvol adjusts you volume using software amplification, 
+# Software Volume or softvol adjusts you volume using software amplification,
 # not your sound cards hardware volume
 softvol=1
 softvol-max=1000
+
+# Ajust volume differences. *
+a52drc=1
 
 # Fit to Screen w and e key
 #panscan=1.0
@@ -77,6 +85,7 @@ softvol-max=1000
 
 # Set autoscale coefficient. (default: 6)
 subfont-osd-scale=4.4
+subfont-osd-scale=3
 
 #===========
 # Appearance
@@ -91,5 +100,7 @@ geometry=50%:50%
 # Skin
 #skin=standard
 
-# Ajust volume differences. *
-a52drc=1
+lavdopts=threads=4
+
+[extension.mp3]
+msglevel=all=5

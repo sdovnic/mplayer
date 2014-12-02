@@ -163,4 +163,4 @@ objShortcut.TargetPath = strDirectory + "\shell\unicode-play.cmd"
 objShortcut.Save
 
 ' Message Box
-MsgBox "MPlayer - Movie Player successfully installed!", 64, "MPlayer - Movie Player Installer (" & strVersion & ")"
+MsgBox "MPlayer - Movie Player successfully installed!" & vbCrLf & "Set Resolution to " & intHorizontal & "x" & intVertical & "." & vbCrLf & "If this Resolution is wrong, change it in the MPlayer config file.", 64, "MPlayer - Movie Player Installer (" & strVersion & ")"
