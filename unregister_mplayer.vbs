@@ -1,7 +1,7 @@
 Option Explicit
 
 Dim strVersion
-strVersion = "13.10.2013"
+strVersion = "03.12.2014"
 
 Dim objShell
 Set objShell = CreateObject("WScript.Shell")
