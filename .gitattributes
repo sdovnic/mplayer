@@ -1,1 +1,2 @@
-
+# Disable LF normalization for all files
+* -text
