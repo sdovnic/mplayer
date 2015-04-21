@@ -64,6 +64,8 @@ objShell.RegDelete strRegistry & "shell\3d-half-ou\command\"
 objShell.RegDelete strRegistry & "shell\3d-half-ou\"
 objShell.RegDelete strRegistry & "shell\3d-full-ou\command\"
 objShell.RegDelete strRegistry & "shell\3d-full-ou\"
+objShell.RegDelete strRegistry & "shell\aspect-16-10-play\command\"
+objShell.RegDelete strRegistry & "shell\aspect-16-10-play\"
 objShell.RegDelete strRegistry & "shell\"
 objShell.RegDelete strRegistry
 
