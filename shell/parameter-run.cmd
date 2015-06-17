@@ -40,7 +40,8 @@ rem   2: side-by-side to green-magenta stereo
 rem   3: side-by-side to quadbuffer stereo
 
 rem "%mplayer%\mplayer\mplayer.exe" %1 -vc ffh264vdpau,ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau -vo vdpau
-"%mplayer%\mplayer\mplayer.exe" %1 -monitoraspect 16:10
+"%mplayer%\mplayer\mplayer.exe" %1 -cache 9999
+rem -monitoraspect 16:10
 rem -aspect 19:9
 rem -vo gl_nosw
 rem -vf stereo3d=above_below_half_height_left_first:mono_left

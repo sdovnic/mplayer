@@ -28,7 +28,7 @@ utf8=yes
 mouse-movements=1
 
 # 'direct rendering' is useless and only causes problems
-dr=no
+#dr=no
 
 # Allows taking screenshots with 's'
 vf=screenshot
@@ -36,9 +36,13 @@ vf=screenshot
 # Enable colored console output
 msgcolor=yes
 
-msglevel=all=4
+#msglevel=all=5
+
+## It's better to leave this enabled on Windows, since the console is slow.
+quiet=yes
 
 cache=8192
+min-cache=8192
 
 slang=ger,eng,und
 alang=ger,jpn,eng,und
@@ -48,8 +52,8 @@ menu=no
 
 # vo=directx is the default for pre-Vista OSes
 # vo=gl:yuv=2 is the default for Vista+
-vo=gl:yuv=2
-#vo=direct3d
+#vo=gl:yuv=2
+vo=direct3d
 
 # Enable stylized subtitles
 ass=yes
@@ -100,7 +104,7 @@ geometry=50%:50%
 # Skin
 #skin=standard
 
-lavdopts=threads=4
+#lavdopts=threads=4
 
 [extension.mp3]
 msglevel=all=5
