@@ -1,7 +1,7 @@
 Option Explicit
 
 Dim strVersion
-strVersion = "03.12.2014"
+strVersion = "14.08.2015"
 
 Dim objShell
 Set objShell = CreateObject("WScript.Shell")
@@ -11,7 +11,9 @@ Dim strExtension, strExtensionPlaylist
 Dim arrExtensions, arrExtensionsPlaylist
 
 ' File Extensions
-arrExtensions = Array("265", "mka", "bik", "evo", "vob", "m4r", "au", "ac3", "asf", "aac", "mkv", "m4a", "mp3", "m2v", "ogv", "ogg", "ogm", "wav", "webm", "weba", "avi", "mp4", "divx", "m4v", "mpg", "mpeg", "wmv", "wma", "flv", "mov", "flac", "m4b", "3gp", "m2ts", "ts", "dts")
+arrExtensions = Array("265", "mka", "bik", "evo", "vob", "m4r", "au", "ac3", "asf", "aac", _
+"mkv", "m4a", "mp3", "m2v", "ogv", "ogg", "ogm", "wav", "webm", "weba", "avi", "mp4", "divx", _
+"m4v", "mpg", "mpeg", "wmv", "wma", "flv", "mov", "flac", "m4b", "3gp", "m2ts", "ts", "dts")
 arrExtensionsPlaylist = Array("m3u", "m3u8", "pls")
 
 ' MPlayer Directory
@@ -26,27 +28,30 @@ strDirectory = objFileSystem.GetParentFolderName(objFile)
 
 ' Set Variables in Shell Files
 Dim arrShells, strShell
-arrShells = Array("aspect-16-10-play", "3d-full-ou", "3d-half-ou", "3d-full-sbs", "3d-half-sbs", "avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", "parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play", "console")
+arrShells = Array("aspect-16-10-play", "3d-full-ou", "3d-half-ou", "3d-full-sbs", "3d-half-sbs", _
+"avdump2", "encode-flac", "ffmpeg-aac", "ffmpeg-mp3", "ffmpeg-ogg", "join-folder", "playlist", _
+"parameter", "parameter-run", "playlist-audio", "playlist-video", "unicode-play", "console")
 
 Const Read = 1
 Const Write = 2
 
 Dim objReadFile, objTempFile, strLine
 For Each strShell in arrShells
-	Set objReadFile = objFileSystem.OpenTextFile(strDirectory & "\shell\" & strShell & ".cmd", Read, True)
-	Set objTempFile = objFileSystem.OpenTextFile(strDirectory & "\shell\" & strShell & ".tmp", Write, True)
-	Do While Not objReadFile.AtEndofStream
-		strLine = objReadFile.ReadLine
-		If InStr(strLine, "set mplayer=") Then
-			strLine = "set mplayer=" & strDirectory
-		End If
-
-		objTempFile.WriteLine strLine
-	Loop
-	objReadFile.Close
-	objTempFile.Close
-	objFileSystem.DeleteFile(strDirectory & "\shell\" & strShell & ".cmd")
-	objFileSystem.MoveFile strDirectory & "\shell\" & strShell & ".tmp", strDirectory & "\shell\" & strShell & ".cmd"
+	If objFileSystem.FileExists(strDirectory & "\shell\" & strShell & ".cmd") Then
+		Set objReadFile = objFileSystem.OpenTextFile(strDirectory & "\shell\" & strShell & ".cmd", Read, True)
+		Set objTempFile = objFileSystem.OpenTextFile(strDirectory & "\shell\" & strShell & ".tmp", Write, True)
+		Do While Not objReadFile.AtEndofStream
+			strLine = objReadFile.ReadLine
+			If InStr(strLine, "set mplayer=") Then
+				strLine = "set mplayer=" & strDirectory
+			End If
+			objTempFile.WriteLine strLine
+		Loop
+		objReadFile.Close
+		objTempFile.Close
+		objFileSystem.DeleteFile(strDirectory & "\shell\" & strShell & ".cmd")
+		objFileSystem.MoveFile strDirectory & "\shell\" & strShell & ".tmp", strDirectory & "\shell\" & strShell & ".cmd"
+	End If
 Next
 
 ' Detect Screen Resolution for Aspect
@@ -63,13 +68,14 @@ Set objReadFile = objFileSystem.OpenTextFile(strDirectory & "\mplayer\mplayer\co
 Set objTempFile = objFileSystem.OpenTextFile(strDirectory & "\mplayer\mplayer\config" & ".tmp", Write, True)
 Do While Not objReadFile.AtEndofStream
 	strLine = objReadFile.ReadLine
-	If InStr(strLine, "monitoraspect=") Then
-		strLine = "monitoraspect=" & intHorizontal & "/" & intVertical
+	If Len(intHorizontal) And Len(intHorizontal) Then
+		If InStr(strLine, "monitoraspect=") Then
+			strLine = "monitoraspect=" & intHorizontal & "/" & intVertical
+		End If
 	End If
 	If InStr(strLine, "ass-styles=") Then
 		strLine = "ass-styles=" & chr(34) & strDirectory & "\mplayer\mplayer\styles.ass" & chr(34)
 	End If
-
 	objTempFile.WriteLine strLine
 Loop
 objReadFile.Close
@@ -98,8 +104,6 @@ objShell.RegWrite strRegistry & "shell\playlist-audio\", "Playlist Audio"
 objShell.RegWrite strRegistry & "shell\playlist-audio\command\", strDirectory & "\shell\playlist-audio.cmd " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\playlist-video\", "Playlist Video"
 objShell.RegWrite strRegistry & "shell\playlist-video\command\", strDirectory & "\shell\playlist-video.cmd " & chr(34) & "%1" & chr(34)
-'objShell.RegWrite strRegistry & "shell\ass\", "Karaoke Untertitel"
-'objShell.RegWrite strRegistry & "shell\ass\command\", strDirectory & "\mplayer\mplayer.exe -ass " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\noass\", "Keine ASS Untertitel"
 objShell.RegWrite strRegistry & "shell\noass\command\", strDirectory & "\mplayer\mplayer.exe -noass " & chr(34) & "%1" & chr(34)
 objShell.RegWrite strRegistry & "shell\reindex\", "Datei mit defektem Index"
@@ -164,4 +168,8 @@ objShortcut.TargetPath = strDirectory + "\shell\unicode-play.cmd"
 objShortcut.Save
 
 ' Message Box
-MsgBox "MPlayer - Movie Player successfully installed!" & vbCrLf & "Set Resolution to " & intHorizontal & "x" & intVertical & "." & vbCrLf & "If this Resolution is wrong, change it in the MPlayer config file.", 64, "MPlayer - Movie Player Installer (" & strVersion & ")"
+If Len(intHorizontal) And Len(intHorizontal) Then
+	MsgBox "MPlayer - Movie Player successfully installed!" & vbCrLf & "Set Resolution to " & intHorizontal & "x" & intVertical & "." & vbCrLf & "If this Resolution is wrong, change it in the MPlayer config file.", 64, "MPlayer - Movie Player Installer (" & strVersion & ")"
+Else
+	MsgBox "MPlayer - Movie Player successfully installed!", 64, "MPlayer - Movie Player Installer (" & strVersion & ")"
+End If
