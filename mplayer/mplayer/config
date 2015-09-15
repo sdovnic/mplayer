@@ -1,11 +1,50 @@
-[default]
-# Manual available at http://www.mplayerhq.hu/DOCS/man/en/mplayer.1.html
+## MPlayer Windows configuration - last rev. 20100716
 
-fontconfig=yes
+[default]
+## Manual available at http://www.mplayerhq.hu/DOCS/man/en/mplayer.1.html
+
+## It's better to leave this enabled on Windows, since the console is slow.
+quiet=yes
+
+## Fancy Color Messages
+msgcolor=yes
+
+## Frame dropping
+#framedrop=yes
+
+## drive letter of your DVD
+#dvd-device=d:
+
+## Uncomment this for AC-3 passthrough.
+#afm=hwac3
+
+## AC3 to Stereo
+channels=2
+
+## Software Volume or softvol adjusts you volume using software amplification,
+## not your sound cards hardware volume
+softvol=1
+softvol-max=1000
+
+## Ajust volume differences. *
+a52drc=1
+
+## Multithreaded decoding on supported codec
+#lavdopts=threads=2
+
+## You can use the DirectX or OpenGL video output, default is directx.
+## For Vista or later you should avoid using directx vo, it will
+## disable Aero
+#vo=directx
+vo=direct3d
+
+## video filtering and postprocessing
+## eq is useful if your video card does not support video overlay.
+#vf=pp,eq
+#vf=eq,pp=lb/hb/vb
+
+## Fontconfig
 font=Calibri
-#font="Open Sans"
-#font=Roboto
-#font=Calibri:style=Bold
 subpos=100
 subfont-text-scale=3
 
@@ -19,92 +58,34 @@ subfont-encoding=unicode
 unicode=yes
 utf8=yes
 
-# h264fast enables 'fast' only for H.264,
-# the only codec where it doesn't look bad
-#lavdopts=h264fast=1
-
-# Needs -vo direct3d or -vo gl
-# Makes the DVD menu selection follow the mouse
-mouse-movements=1
-
-# 'direct rendering' is useless and only causes problems
-#dr=no
-
-# Allows taking screenshots with 's'
-vf=screenshot
-
-# Enable colored console output
-msgcolor=yes
-
-#msglevel=all=5
-
-## It's better to leave this enabled on Windows, since the console is slow.
-quiet=yes
-
-cache=8192
-min-cache=8192
-
 slang=ger,eng,und
 alang=ger,jpn,eng,und
 
+## Needs -vo direct3d or -vo gl
+## Makes the DVD menu selection follow the mouse
+mouse-movements=1
+
+## Allows taking screenshots with 's'
+vf=screenshot
+
+## Monitor Aspect
 monitoraspect=1920/1080
+
+## Cache
+cache=8192
+
+## OSD Set autoscale coefficient. (default: 6)
+subfont-osd-scale=4.4
+
+## Disable Menu
 menu=no
 
-# vo=directx is the default for pre-Vista OSes
-# vo=gl:yuv=2 is the default for Vista+
-#vo=gl:yuv=2
-vo=direct3d
-
-# Enable stylized subtitles
+## Position window. (50%:50%: center of screen) Enable stylized subtitles
 ass=yes
 embeddedfonts=yes
-#ass-force-style=Fontname=Calibri,Fontsize=30,PrimaryColour=&H00ffffff,BorderStyle=0
 ass-styles="C:\Portable\mplayer\mplayer\mplayer\styles.ass"
 
-# Passthrough in der MPlayer-Konfigurationsdatei aktivieren:
-# Für nur AC3, benutze ac=hwac3,
-# Für nur DTS, benutze ac=hwdts,
-# Für AC3 und DTS, benutze afm=hwac3
-#afm=hwac3,hwdts,ffmlp
-#ac=hwac3,hwdts,ffmlp
-
-# AC3 zu Stereo
-# -channels 2 -af volume=40
-channels=2
-#volume=100
-
-# Software Volume or softvol adjusts you volume using software amplification,
-# not your sound cards hardware volume
-softvol=1
-softvol-max=1000
-
-# Ajust volume differences. *
-a52drc=1
-
-# Fit to Screen w and e key
-#panscan=1.0
-
-# OSD
-#====
-
-# Set autoscale coefficient. (default: 6)
-subfont-osd-scale=4.4
-subfont-osd-scale=3
-
-#===========
-# Appearance
-#===========
-
-# Disable screensaver.
-#stop-xscreensaver=yes
-
-# Position window. (50%:50%: center of screen)
 geometry=50%:50%
 
-# Skin
-#skin=standard
-
-#lavdopts=threads=4
-
-[extension.mp3]
-msglevel=all=5
+#[extension.mp3]
+#msglevel=all=5

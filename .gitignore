@@ -1,7 +1,9 @@
-avdump2/done.txt
 avdump2/ed2k.txt
-shell/avdump2.ini
-shell/parameter-run.cmd
+avdump2/done.txt
+avdump2/libMediaInfo_x86.so
+avdump2/MediaInfo_x86.dll
 contrib/
-Desktop.ini
-Thumbs.db
+mplayer/mplayer/subfont.ttf
+mplayer/mplayer/styles.ass
+shell/avdump2.ini
+shell/play-parameter-run.cmd

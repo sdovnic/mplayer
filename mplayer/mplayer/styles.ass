@@ -4,8 +4,6 @@
 Title: Default Aegisub file
 ScriptType: v4.00+
 WrapStyle: 0
-#PlayResX: 640
-#PlayResY: 480
 PlayResX: 800
 PlayResY: 340
 ScaledBorderAndShadow: no

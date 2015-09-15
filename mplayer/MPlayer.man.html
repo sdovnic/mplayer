@@ -1,5 +1,5 @@
 <!-- Creator     : groff version 1.22.3 -->
-<!-- CreationDate: Wed Feb  4 05:02:07 2015 -->
+<!-- CreationDate: Thu Sep 10 00:08:44 2015 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -599,8 +599,8 @@ It has the following format: <br>
 EXAMPLES:</i> <br>
 mplayer &minus;ao pcm:file=%10%C:test.wav test.avi <br>
 Or in a script: <br>
-mplayer &minus;ao pcm:file=%&rsquo;expr length
-&quot;$NAME&quot;&rsquo;%&quot;$NAME&quot; test.avi</p>
+mplayer &minus;ao pcm:file=%&lsquo;expr length
+&quot;$NAME&quot;&lsquo;%&quot;$NAME&quot; test.avi</p>
 
 <h2>CONFIGURATION FILES
 <a name="CONFIGURATION FILES"></a>
@@ -1667,9 +1667,9 @@ is not safe against maliciously constructed files. Such
 files may trigger harmful actions. This has been the case
 for all MPlayer versions, but unfortunately this fact was
 not well documented earlier, and some people have even
-misguidedly recommended use of -playlist with untrusted
-sources. Do NOT use -playlist with random internet sources
-or files you don&rsquo;t trust! <i><br>
+misguidedly recommended use of &minus;playlist with
+untrusted sources. Do NOT use &minus;playlist with random
+internet sources or files you don&rsquo;t trust! <i><br>
 NOTE:</i> This option is considered an entry so options
 found after it will apply only to the elements of this
 playlist. <br>
@@ -2741,14 +2741,14 @@ of possible strings.</p>
 
 <p style="margin-left:22%; margin-top: 1em"><i>EXAMPLE:</i></p>
 
-<p style="margin-left:26%;">mplayer foreman.qcif -demuxer
-rawvideo -rawvideo qcif</p>
+<p style="margin-left:26%;">mplayer foreman.qcif
+&minus;demuxer rawvideo &minus;rawvideo qcif</p>
 
 <p style="margin-left:34%;">Play the famous
 &quot;foreman&quot; sample video.</p>
 
 <p style="margin-left:26%;">mplayer sample-720x576.yuv
--demuxer rawvideo -rawvideo <br>
+&minus;demuxer rawvideo &minus;rawvideo <br>
 w=720:h=576</p>
 
 <p style="margin-left:34%;">Play a raw YUV sample.</p>
@@ -2912,7 +2912,7 @@ v4l2, bsdbt848 (default: autodetect)</p>
 <p style="margin-left:34%;">Specify TV device (default:
 /dev/video0). <i>NOTE:</i> For the bsdbt848 driver you can
 provide both bktr and tuner device names separating them
-with a comma, tuner after bktr (e.g. -tv
+with a comma, tuner after bktr (e.g. &minus;tv
 device=/dev/bktr1,/dev/tuner1).</p>
 
 <p style="margin-left:26%;">input=&lt;value&gt;</p>
@@ -3172,8 +3172,9 @@ resulting in choppy video when using immediatemode=0.</p>
 &lt;option1:option2:...&gt; (TV and MPlayer only)</b></p>
 
 <p style="margin-left:22%;">Tune the TV channel scanner.
-MPlayer will also print value for &quot;-tv channels=&quot;
-option, including existing and just found channels.</p>
+MPlayer will also print value for &quot;&minus;tv
+channels=&quot; option, including existing and just found
+channels.</p>
 
 <p style="margin-left:22%; margin-top: 1em">Available
 suboptions are:</p>
@@ -4040,8 +4041,8 @@ so far.</p>
 
 <p style="margin-left:22%;">If your system supports
 iconv(3), you can use this option to specify the subtitle
-codepage. It takes priority over both -utf8 and
--unicode.</p>
+codepage. It takes priority over both &minus;utf8 and
+&minus;unicode.</p>
 
 
 <p style="margin-left:22%; margin-top: 1em"><i>EXAMPLE:</i></p>
@@ -4268,7 +4269,7 @@ line used for the OSD and clear it (default:
 
 <p style="margin-left:22%;">Tells MPlayer to handle the
 subtitle file as unicode. (It will only take effect if
-neither -subcp nor -utf8 is given.)</p>
+neither &minus;subcp nor &minus;utf8 is given.)</p>
 
 <p style="margin-left:11%;"><b>&minus;unrarexec &lt;path to
 unrar executable&gt; (not supported on MingW)</b></p>
@@ -4283,8 +4284,9 @@ path must include the executable&rsquo;s filename, i.e.
 &nbsp;&nbsp;</b></p>
 
 <p style="margin-left:22%;">Tells MPlayer to handle the
-subtitle file as UTF-8. (It will only take effect if -subcp
-isn&rsquo;t given, and it takes priority over -unicode.)</p>
+subtitle file as UTF-8. (It will only take effect if
+&minus;subcp isn&rsquo;t given, and it takes priority over
+&minus;unicode.)</p>
 
 <p style="margin-left:11%;"><b>&minus;vobsub &lt;VOBsub
 file without extension&gt;</b></p>
@@ -4369,8 +4371,8 @@ volume changes in percent of the whole range (default:
 
 <p style="margin-left:22%;">Set the startup volume in the
 mixer, either hardware or software (if used with
-&minus;softvol). A value of -1 (the default) will not change
-the volume.</p>
+&minus;softvol). A value of &minus;1 (the default) will not
+change the volume.</p>
 
 <h2>AUDIO OUTPUT DRIVERS (MPLAYER ONLY)
 <a name="AUDIO OUTPUT DRIVERS (MPLAYER ONLY)"></a>
@@ -5052,6 +5054,18 @@ specified.</p>
 <p style="margin-left:34%;">Fixes fullscreen switching on
 OpenBox 1.x.</p>
 
+<p style="margin-left:11%;"><b>&minus;fs-border-left
+&lt;pixels&gt; <br>
+&minus;fs-border-right &lt;pixels&gt; <br>
+&minus;fs-border-top &lt;pixels&gt; <br>
+&minus;fs-border-bottom &lt;pixels&gt;</b></p>
+
+<p style="margin-left:22%;">Specify extra borders in full
+screen mode. The borders apply to all displayed elements:
+video, OSD and EOSD. The number of pixels is specified in
+terms of screen resolution. Currently only supported with by
+the gl video output driver.</p>
+
 <p style="margin-left:11%;"><b>&minus;gamma
 &lt;&minus;100&minus;100&gt;</b></p>
 
@@ -5060,7 +5074,7 @@ signal (default: 0). Not supported by all video output
 drivers.</p>
 
 <p style="margin-left:11%;"><b>&minus;geometry x[%][:y[%]]
-or [WxH][+-x+-y]</b></p>
+or [WxH][+&minus;x+&minus;y]</b></p>
 
 <p style="margin-left:22%;">Adjust where the output is on
 the screen initially. The x and y specifications are in
@@ -5069,17 +5083,17 @@ top-left of the image being displayed, however if a
 percentage sign is given after the argument it turns the
 value into a percentage of the screen size in that
 direction. It also supports the standard X11 &minus;geometry
-option format, in which e.g. +10-50 means &quot;place 10
-pixels from the left border and 50 pixels from the lower
-border&quot; and &quot;--20+-10&quot; means &quot;place 20
-pixels beyond the right and 10 pixels beyond the top
-border&quot;. If an external window is specified using the
-&minus;wid option, then the x and y coordinates are relative
-to the top-left corner of the window rather than the screen.
-The coordinates are relative to the screen given with
-&minus;xineramascreen for the video output drivers that
-fully support &minus;xineramascreen (direct3d, gl, gl_tiled,
-vdpau, x11, xv, xvmc, corevideo). <i><br>
+option format, in which e.g. +10&minus;50 means &quot;place
+10 pixels from the left border and 50 pixels from the lower
+border&quot; and &quot;&minus;&minus;20+&minus;10&quot;
+means &quot;place 20 pixels beyond the right and 10 pixels
+beyond the top border&quot;. If an external window is
+specified using the &minus;wid option, then the x and y
+coordinates are relative to the top-left corner of the
+window rather than the screen. The coordinates are relative
+to the screen given with &minus;screen for the video output
+drivers that fully support &minus;screen (direct3d, gl,
+gl_tiled, vdpau, x11, xv, xvmc, corevideo). <i><br>
 NOTE:</i> This option is only supported by the x11, xmga,
 xv, xvmc, xvidix, gl, gl_tiled, direct3d, directx, fbdev,
 sdl, dfxfb and corevideo video output drivers.</p>
@@ -5254,7 +5268,7 @@ default <br>
 <p style="margin-left:22%;">Rotate display by 90, 180 or
 270 degrees. Rotates also the OSD, not just the video image
 itself. Currently only supported by the gl video output
-driver. For all other video outputs -vf
+driver. For all other video outputs &minus;vf
 ass,expand=osd=1,rotate=n can be used, in the future this
 might even happen automatically.</p>
 
@@ -5345,8 +5359,9 @@ window completely, thus aspect scaling, panscan, etc are no
 longer handled by MPlayer but must be managed by the
 application that created the window.</p>
 
-<p style="margin-left:11%;"><b>&minus;xineramascreen
-&lt;&minus;2&minus;...&gt;</b></p>
+<p style="margin-left:11%;"><b>&minus;screen
+&lt;&minus;2&minus;...&gt; (alias for
+&minus;xineramascreen)</b></p>
 
 <p style="margin-left:22%;">In Xinerama configurations
 (i.e. a single desktop that spans across multiple displays)
@@ -6033,11 +6048,10 @@ driver</p>
 
 <p style="margin-left:26%;">device_id=&lt;number&gt;</p>
 
-<p style="margin-left:34%;">DEPRECATED, use
-&minus;xineramascreen instead. Choose the display device to
-use for fullscreen or set it to &minus;1 to always use the
-same screen the video window is on (default: &minus;1
-&minus; auto).</p>
+<p style="margin-left:34%;">DEPRECATED, use &minus;screen
+instead. Choose the display device to use for fullscreen or
+set it to &minus;1 to always use the same screen the video
+window is on (default: &minus;1 &minus; auto).</p>
 
 <p style="margin-left:26%;">shared_buffer</p>
 
@@ -6165,9 +6179,9 @@ supported OpenGL extensions.</p>
 <p style="margin-left:26%;">backend=&lt;n&gt;</p>
 
 <p style="margin-left:34%;">Select the backend/OpenGL
-implementation to use (default: -1).</p>
+implementation to use (default: &minus;1).</p>
 
-<p style="margin-left:38%;">-1: Autoselect <br>
+<p style="margin-left:38%;">&minus;1: Autoselect <br>
 0: Win32/WGL <br>
 1: X11/GLX <br>
 2: SDL <br>
@@ -7052,10 +7066,10 @@ it in a file (default: ./stream.yuv). The format is the same
 as the one employed by mjpegtools, so this is useful if you
 want to process the video with the mjpegtools suite. It
 supports the YV12 format. If your source file has a
-different format and is interlaced, make sure to use -vf
-scale=::1 to ensure the conversion uses interlaced mode. You
-can combine it with the &minus;fixed&minus;vo option to
-concatenate files with the same dimensions and fps
+different format and is interlaced, make sure to use
+&minus;vf scale=::1 to ensure the conversion uses interlaced
+mode. You can combine it with the &minus;fixed&minus;vo
+option to concatenate files with the same dimensions and fps
 value.</p>
 
 <p style="margin-left:26%;">interlaced</p>
@@ -8861,7 +8875,7 @@ Scales this amount in addition to speed. (default: 1.0)</p>
 <p style="margin-left:26%;">stride=&lt;amount&gt;</p>
 
 <p style="margin-left:34%;">Length in milliseconds to
-output each stride. Too high of value will cause noticable
+output each stride. Too high of value will cause noticeable
 skips at high scale amounts and an echo at low scale
 amounts. Very low values will alter pitch. Increasing
 improves performance. (default: 60)</p>
@@ -8974,18 +8988,18 @@ about the audio stream, especially the volume. These
 statistics are especially intended to help adjusting the
 volume while avoiding clipping. The volumes are printed in
 dB and compatible with the volume audio filter, they are
-always rounded towards -0dB.</p>
+always rounded towards &minus;0dB.</p>
 
 <p style="margin-left:22%; margin-top: 1em">The
 &rsquo;n_samples&rsquo; field is the total number of samples
 seen by the filter. The &rsquo;mean_volume&rsquo; field is
 the root mean square. The &rsquo;max_volume&rsquo; field is
 exactly what it says. The &rsquo;histogram_Xdb&rsquo; fields
-count how many samples were at -XdB, for X just below
+count how many samples were at &minus;XdB, for X just below
 max_volume.</p>
 
 <p style="margin-left:22%; margin-top: 1em">For example, if
-max_volume is -7dB and histogram_7dB is 19,
+max_volume is &minus;7dB and histogram_7dB is 19,
 &rsquo;volume=7&rsquo; will not cause clipping and
 &rsquo;volume=8&rsquo; will cause clipping on exactly 19
 samples.</p>
@@ -10206,7 +10220,7 @@ strangely with other filters.</p>
 <p style="margin-left:22%; margin-top: 1em"><i>EXAMPLE:</i>
 <br>
 overlay=&quot;movie=$small_video, scale=160:120 [ca]; [in]
-[ca] overlay=16:8&quot; mplayer -vf
+[ca] overlay=16:8&quot; mplayer &minus;vf
 lavfi=&rsquo;$overlay&rsquo; $big_video</p>
 
 
@@ -11602,9 +11616,9 @@ the interleaved-rows output formats to display full-screen
 on a row-interleaved 3D display, you will need to scale the
 video to the correct height first using the
 &quot;scale&quot; filter, if it is not already the right
-height. Typically, that is 1080 rows (so use e.g. &quot;-vf
-scale=1440:1080,stereo3d=sbsl:irl&quot; for a 720p
-side-by-side encoded movie).</p>
+height. Typically, that is 1080 rows (so use e.g.
+&quot;&minus;vf scale=1440:1080,stereo3d=sbsl:irl&quot; for
+a 720p side-by-side encoded movie).</p>
 
 
 <p style="margin-left:11%;"><b>gradfun[=strength[:radius]]</b></p>
@@ -11679,8 +11693,8 @@ necessary to avoid confusing encoders.</p>
 
 <p style="margin-left:22%; margin-top: 1em"><i>NOTE:</i>
 Using this filter together with any sort of seeking
-(including -ss and EDLs) may make demons fly out of your
-nose.</p>
+(including &minus;ss and EDLs) may make demons fly out of
+your nose.</p>
 
 <h2>GENERAL ENCODING OPTIONS (MENCODER ONLY)
 <a name="GENERAL ENCODING OPTIONS (MENCODER ONLY)"></a>
