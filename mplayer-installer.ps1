@@ -1,68 +1,73 @@
-Set-PSDebug -Strict
-Function Show-Balloon {
-    Param(
-        [Parameter(Mandatory=$true)] [String] $TipTitle,
-        [Parameter(Mandatory=$true)] [String] $TipText,
-        [Parameter(Mandatory=$false)] [ValidateSet("Info", "Error", "Warning")] [String] $TipIcon,
-        [String] $Icon
+function Show-Balloon {
+    param(
+        [parameter(Mandatory=$true)] [string] $TipTitle,
+        [parameter(Mandatory=$true)] [string] $TipText,
+        [parameter(Mandatory=$false)] [ValidateSet("Info", "Error", "Warning")] [string] $TipIcon,
+        [string] $Icon
     )
-    [Void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
-    $FormsNotifyIcon = New-Object System.Windows.Forms.NotifyIcon
-    If (-not $Icon) { $Icon = (Join-Path -Path $PSHOME -ChildPath "powershell.exe"); }
-    $DrawingIcon = [System.Drawing.Icon]::ExtractAssociatedIcon($Icon)
-    $FormsNotifyIcon.Icon = $DrawingIcon
-    If (-not $TipIcon) { $TipIcon = "Info"; }
-    $FormsNotifyIcon.BalloonTipIcon = $TipIcon;
-    $FormsNotifyIcon.BalloonTipTitle = $TipTitle
-    $FormsNotifyIcon.BalloonTipText = $TipText
-    $FormsNotifyIcon.Visible = $True
-    $FormsNotifyIcon.ShowBalloonTip(5000)
-    Start-Sleep -Milliseconds 5000
-    $FormsNotifyIcon.Dispose()
-}
-Function Add-ShortCut {
-    Param(
-        [Parameter(Mandatory=$true)] [String] $Link,
-        [Parameter(Mandatory=$true)] [String] $TargetPath,
-        [String] $Arguments,
-        [String] $IconLocation,
-        [String] $WorkingDirectory,
-        [String] $Description,
-        [Parameter(Mandatory=$false)] [ValidateSet("Normal", "Minimized", "Maximized")] [String] $WindowStyle
-    )
-    If (Test-Path -Path $TargetPath) {
-        $WShell = New-Object -ComObject WScript.Shell
-        $Shortcut = $WShell.CreateShortcut($Link)
-        $Shortcut.TargetPath = $TargetPath
-        If ($Arguments) { $Shortcut.Arguments = $Arguments; }
-        If ($IconLocation) { $Shortcut.IconLocation = $IconLocation; }
-        If ($WorkingDirectory) { $Shortcut.WorkingDirectory = $WorkingDirectory; }
-        If ($WindowStyle) {
-            Switch ($WindowStyle) {
-                "Normal" { [Int] $WindowStyleNumerate = 4 };
-                "Minimized" { [Int] $WindowStyleNumerate = 7 };
-                "Maximized" { [Int] $WindowStyleNumerate = 3 };
-            }
-            $Shortcut.WindowStyle = $WindowStyleNumerate;
-        }
-        If ($Description) { $Shortcut.Description = $Description; }
-        $Shortcut.Save()
+    process {
+        [Void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+        $FormsNotifyIcon = New-Object -TypeName System.Windows.Forms.NotifyIcon
+        if (-not $Icon) { $Icon = (Join-Path -Path $PSHOME -ChildPath "powershell.exe"); }
+        $DrawingIcon = [System.Drawing.Icon]::ExtractAssociatedIcon($Icon)
+        $FormsNotifyIcon.Icon = $DrawingIcon
+        if (-not $TipIcon) { $TipIcon = "Info"; }
+        $FormsNotifyIcon.BalloonTipIcon = $TipIcon;
+        $FormsNotifyIcon.BalloonTipTitle = $TipTitle
+        $FormsNotifyIcon.BalloonTipText = $TipText
+        $FormsNotifyIcon.Visible = $True
+        $FormsNotifyIcon.ShowBalloonTip(5000)
+        Start-Sleep -Milliseconds 5000
+        $FormsNotifyIcon.Dispose()
     }
 }
-Function Remove-Shortcut {
-    Param([Parameter(Mandatory=$true)] [String] $Link)
-    If (Test-Path -Path $Link) { Remove-Item $Link; }
+function Add-ShortCut {
+    param(
+        [parameter(Mandatory=$true)] [string] $Link,
+        [parameter(Mandatory=$true)] [string] $TargetPath,
+        [string] $Arguments,
+        [string] $IconLocation,
+        [string] $WorkingDirectory,
+        [string] $Description,
+        [parameter(Mandatory=$false)] [ValidateSet("Normal", "Minimized", "Maximized")] [string] $WindowStyle
+    )
+    process {
+        if (Test-Path -Path $TargetPath) {
+            $WShell = New-Object -ComObject WScript.Shell
+            $Shortcut = $WShell.CreateShortcut($Link)
+            $Shortcut.TargetPath = $TargetPath
+            if ($Arguments) { $Shortcut.Arguments = $Arguments; }
+            if ($IconLocation) { $Shortcut.IconLocation = $IconLocation; }
+            if ($WorkingDirectory) { $Shortcut.WorkingDirectory = $WorkingDirectory; }
+            if ($WindowStyle) {
+                Switch ($WindowStyle) {
+                    "Normal" { [Int] $WindowStyleNumerate = 4 };
+                    "Minimized" { [Int] $WindowStyleNumerate = 7 };
+                    "Maximized" { [Int] $WindowStyleNumerate = 3 };
+                }
+                $Shortcut.WindowStyle = $WindowStyleNumerate;
+            }
+            if ($Description) { $Shortcut.Description = $Description; }
+            $Shortcut.Save()
+        }
+    }
 }
-[String] $AppFriendlyName = "MPlayer - Movie Player"
-[String] $AppName = "MPlayer"
-[String] $AppDescription = "MPlayer is a movie player which runs on many systems."
-If ($PSVersionTable.PSVersion.Major -lt 3) {
-    [String] $PSScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
+function Remove-Shortcut {
+    param([parameter(Mandatory=$true)] [string] $Link)
+    process {
+        if (Test-Path -Path $Link) { Remove-Item -Path $Link; }
+    }
 }
-[String] $AppLocation = $PSScriptRoot
-[String] $AppIcon = "%SystemRoot%\System32\imageres.dll,128"
-[String] $AppIconAudio = "%SystemRoot%\System32\imageres.dll,125"
-[String] $AppIconVideo = "%SystemRoot%\System32\imageres.dll,127"
+[string] $AppFriendlyName = "MPlayer - Movie Player"
+[string] $AppName = "MPlayer"
+[string] $AppDescription = "MPlayer is a movie player which runs on many systems."
+if ($PSVersionTable.PSVersion.Major -lt 3) {
+    [string] $PSScriptRoot = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+}
+[string] $AppLocation = $PSScriptRoot
+[string] $AppIcon = "%SystemRoot%\System32\imageres.dll,128"
+[string] $AppIconAudio = "%SystemRoot%\System32\imageres.dll,125"
+[string] $AppIconVideo = "%SystemRoot%\System32\imageres.dll,127"
 [array] $ExtensionsAudio = @(
     "mka", "m4r", "au", "ac3", "aac", "m4a", "mp3", "ogg", "wav", "weba", "wma", "flac", "m4b", "dts"
 )
@@ -73,106 +78,106 @@ If ($PSVersionTable.PSVersion.Major -lt 3) {
 [array] $ExtensionsPlaylist = @(
     "m3u", "m3u8", "pls"
 )
-If ($args.Length -gt 0) {
-    If ($args[0].Contains("remove")) {
-        Write-Host "Remove Submenu Entries for Extract Audio"
+if ($args.Length -gt 0) {
+    if ($args[0].Contains("remove")) {
+        Write-Host -Object "Remove Submenu Entries for Extract Audio"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extract"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove Submenu Entries for 3D Options"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove Submenu Entries for 3D Options"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName.3D"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove Submenu Entries for Extras"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove Submenu Entries for Extras"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extras"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove Submenu Entries for Playlists"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove Submenu Entries for Playlists"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove File Associations"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove File Associations"
         Foreach($Extension in $ExtensionsAudio) {
             $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-            If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+            if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         }
         Foreach($Extension in $ExtensionsVideo) {
             $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-            If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+            if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         }
         Foreach($Extension in $ExtensionsPlaylist) {
             $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-            If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+            if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         }
-        Write-Host "Remove Menu Entries Video"
+        Write-Host -Object "Remove Menu Entries Video"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove Menu Entries Audio"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove Menu Entries Audio"
         $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
-        Write-Host "Remove Leftovers"
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        Write-Host -Object "Remove Leftovers"
         $Path = "HKCU:\SOFTWARE\Classes\playlist.cmd"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         $Path = "HKCU:\SOFTWARE\Classes\mplayer.exe"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         $Path = "HKCU:\SOFTWARE\Classes\mplayer.exe.test"
-        If (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
+        if (Test-Path -Path $Path) { Remove-Item -Path $Path -Recurse -Confirm:$false -Force; }
         Foreach($Extension in $ExtensionsAudio) {
-            [String] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
-            If (Test-Path -Path $Path) {
+            [string] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
+            if (Test-Path -Path $Path) {
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "mplayer.exe*" -ErrorAction SilentlyContinue
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "MPlayer*" -ErrorAction SilentlyContinue
             }
         }
         Foreach($Extension in $ExtensionsVideo) {
-            [String] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
-            If (Test-Path -Path $Path) {
+            [string] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
+            if (Test-Path -Path $Path) {
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "mplayer.exe*" -ErrorAction SilentlyContinue
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "MPlayer*" -ErrorAction SilentlyContinue
             }
         }
         Foreach($Extension in $ExtensionsPlaylist) {
-            [String] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
-            If (Test-Path -Path $Path) {
+            [string] $Path = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids"
+            if (Test-Path -Path $Path) {
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "mplayer.exe'" -ErrorAction SilentlyContinue
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "MPlayer*" -ErrorAction SilentlyContinue
                 Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$Extension\OpenWithProgids" -Name "playlist.cmd" -ErrorAction SilentlyContinue
             }
         }
-        Write-Host "Remove SendTo ShortCut"
+        Write-Host -Object "Remove SendTo ShortCut"
         Remove-ShortCut -Link (Join-Path -Path ([environment]::GetFolderPath("SendTo")) -ChildPath "$AppFriendlyName.lnk")
-        Write-Host "Show Install Message"
+        Write-Host -Object "Show Install Message"
         Add-Type -AssemblyName System.Windows.Forms
         $Result = [System.Windows.Forms.MessageBox]::Show(
            "$AppFriendlyName removed.",
            $AppFriendlyName, 0, [System.Windows.Forms.MessageBoxIcon]::Information
         )
-        Write-Host "Show Balloon Message"
+        Write-Host -Object "Show Balloon Message"
         Show-Balloon -TipTitle $AppFriendlyName -TipText "MPlayer - Movie Player removed."
     }
 } Else {
-    Write-Host "Add SendTo ShortCut"
+    Write-Host -Object "Add SendTo ShortCut"
     Add-ShortCut -Link (Join-Path -Path ([environment]::GetFolderPath("SendTo")) -ChildPath "$AppFriendlyName.lnk") `
                  -TargetPath (Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer.exe") `
                  -Arguments "`"%1`"" -IconLocation $AppIcon -WorkingDirectory $PSScriptRoot -WindowStyle Normal `
                  -Description $AppDescription
-    Write-Host "Set Path to Application Location"
+    Write-Host -Object "Set Path to Application Location"
     Foreach($Item in (Get-Item -Path "$AppLocation\shell\*.cmd")) {
         $Content = Get-Content -Path $Item.FullName
         $Content -replace "^set\ mplayer\=(.*)$", "set mplayer=$AppLocation" | Out-File -FilePath $Item.FullName -Encoding Ascii
     }
-    Write-Host "Add Mouse Bindings"
+    Write-Host -Object "Add Mouse Bindings"
     [Array] $MouseBindings = @(
         "MOUSE_BTN1 pause",
         "MOUSE_BTN2 vo_fullscreen"
     )
-    [String] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\input.conf"
-    If (Test-Path -Path $Path) {
+    [string] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\input.conf"
+    if (Test-Path -Path $Path) {
         $Content = Get-Content -Path $Path
         Foreach($MouseBinding in $MouseBindings) {
-            If ($Content -notmatch $MouseBinding) {
+            if ($Content -notmatch $MouseBinding) {
                 Add-Content -Path $Path -Value $MouseBinding -Force
             }
         }
     }
-    Write-Host "Install StyleScript"
-    [String] $StyleScript = "[Script Info]
+    Write-Host -Object "Install StyleScript"
+    [string] $StyleScript = "[Script Info]
 ; Script generated by Aegisub 2.1.9
 ; http://www.aegisub.org/
 Title: Default Aegisub file
@@ -189,22 +194,22 @@ Video Position: 0
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,100,100,0,0,1,1,0,2,10,10,10,1"
-    [String] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\styles.ass"
-    If (-not (Test-Path -Path $Path)) {
+    [string] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\styles.ass"
+    if (-not (Test-Path -Path $Path)) {
         $StyleScript | Out-File -FilePath $Path -Encoding Ascii
     }
-    Write-Host "Set Path to StyleScript"
-    [String] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\config"
+    Write-Host -Object "Set Path to StyleScript"
+    [string] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\config"
     $Content = Get-Content -Path $Path
     $Content -replace "^ass\-styles\=(.*)$", "ass-styles=`"$AppLocation\mplayer\mplayer\styles.ass`"" | Out-File -FilePath $Path -Encoding Ascii
-    Write-Host "Register Menu Entries Video"
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\Open\Command"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    Write-Host -Object "Register Menu Entries Video"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\Open\Command"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value "`"$(Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer.exe")`" `"%1`""
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName\DefaultIcon"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName\DefaultIcon"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value $AppIconVideo
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName"
     Set-ItemProperty -Path $Path -Name "FriendlyAppName" -Value $AppFriendlyName
     [hashtable] $Items = @{
         "AVDump2" = @{
@@ -221,20 +226,20 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item\Command"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item\Command"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Command
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item"
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item"
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Default
     }
-    Write-Host "Register Menu Entries Audio"
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio\Shell\Open\Command"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    Write-Host -Object "Register Menu Entries Audio"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio\Shell\Open\Command"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value "`"$(Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer.exe")`" `"%1`""
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio\DefaultIcon"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio\DefaultIcon"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value $AppIconAudio
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Audio"
     Set-ItemProperty -Path $Path -Name "FriendlyAppName" -Value $AppFriendlyName
     [hashtable] $Items = @{
         "Console" = @{
@@ -251,43 +256,43 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\$Item\Command"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\$Item\Command"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Command
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\$Item"
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\$Item"
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Default
     }
-    Write-Host "Register Menu Entries for Playlists"
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\Open\Command"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    Write-Host -Object "Register Menu Entries for Playlists"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\Shell\Open\Command"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value "`"$(Join-Path -Path $AppLocation -ChildPath "shell\playlist-audio.cmd")`" `"%1`""
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\DefaultIcon"
-    If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist\DefaultIcon"
+    if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
     Set-ItemProperty -Path $Path -Name "(default)" -Value $AppIconAudio
-    [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist"
+    [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Playlist"
     Set-ItemProperty -Path $Path -Name "FriendlyAppName" -Value $AppFriendlyName
-    Write-Host "Register Association with Audio Files"
+    Write-Host -Object "Register Association with Audio Files"
     Foreach($Extension in $ExtensionsAudio) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value "$AppName.Audio"
         Set-ItemProperty -Path $Path -Name "PerceivedType" -Value "audio"
     }
-    Write-Host "Register Association with Video Files"
+    Write-Host -Object "Register Association with Video Files"
     Foreach($Extension in $ExtensionsVideo) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $AppName
         Set-ItemProperty -Path $Path -Name "PerceivedType" -Value "video"
     }
-    Write-Host "Register Association with Playlist Files"
+    Write-Host -Object "Register Association with Playlist Files"
     foreach($Extension in $ExtensionsPlaylist) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\.$Extension"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value "$AppName.Playlist"
         Set-ItemProperty -Path $Path -Name "PerceivedType" -Value "audio"
     }
-    Write-Host "Register Submenu Entries"
+    Write-Host -Object "Register Submenu Entries"
     [hashtable] $Items = @{
         "Extract" = @{
             "MUIVerb" = "Extract Audio";
@@ -303,12 +308,12 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName\Shell\$Item"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "MUIVerb" -Value $Items.Item($Item).MuiVerb
         Set-ItemProperty -Path $Path -Name "ExtendedSubCommandsKey" -Value $Items.Item($Item).ExtendedSubCommandsKey
     }
-    Write-Host "Register Submenu Entries for Extras"
+    Write-Host -Object "Register Submenu Entries for Extras"
     [hashtable] $Items = @{
         "Broken-Index" = @{
             "MUIVerb" = "Broken Index";
@@ -328,13 +333,13 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extras\Shell\$Item\Command"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extras\Shell\$Item\Command"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Command
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extras\Shell\$Item"
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extras\Shell\$Item"
         Set-ItemProperty -Path $Path -Name "MUIVerb" -Value $Items.Item($Item).MuiVerb
     }
-    Write-Host "Register Submenu Entries for Extract Audio"
+    Write-Host -Object "Register Submenu Entries for Extract Audio"
     [hashtable] $Items = @{
         "Extract-AAC" = @{
             "MUIVerb" = "AAC";
@@ -350,13 +355,13 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extract\Shell\$Item\Command"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extract\Shell\$Item\Command"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Command
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extract\Shell\$Item"
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.Extract\Shell\$Item"
         Set-ItemProperty -Path $Path -Name "MUIVerb" -Value $Items.Item($Item).MuiVerb
     }
-    Write-Host "Register Submenu Entries for 3D Options"
+    Write-Host -Object "Register Submenu Entries for 3D Options"
     [hashtable] $Items = @{
         "Full-SBS" = @{
             "MUIVerb" = "Full Side by Side";
@@ -384,33 +389,33 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
         };
     }
     Foreach($Item in $Items.Keys) {
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.3D\Shell\$Item\Command"
-        If (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.3D\Shell\$Item\Command"
+        if (-not (Test-Path -Path $Path)) { New-Item -Path $Path -Force; }
         Set-ItemProperty -Path $Path -Name "(default)" -Value $Items.Item($Item).Command
-        [String] $Path = "HKCU:\SOFTWARE\Classes\$AppName.3D\Shell\$Item"
+        [string] $Path = "HKCU:\SOFTWARE\Classes\$AppName.3D\Shell\$Item"
         Set-ItemProperty -Path $Path -Name "MUIVerb" -Value $Items.Item($Item).MuiVerb
     }
-    Write-Host "Ask for Screen Aspect Ratio"
+    Write-Host -Object "Ask for Screen Aspect Ratio"
     Add-Type -AssemblyName System.Windows.Forms
     $Bounds = ([System.Windows.Forms.Screen]::AllScreens)[0].Bounds
     $Width = $Bounds.Width
     $Height = $Bounds.Height
-    [String] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\config"
+    [string] $Path = Join-Path -Path $AppLocation -ChildPath "mplayer\mplayer\config"
     $Content = Get-Content -Path $Path
-    If ($Content -notcontains "monitoraspect=${Width}/${Height}" -and $Content -contains "monitoraspect=") {
+    if ($Content -notcontains "monitoraspect=${Width}/${Height}" -and $Content -contains "monitoraspect=") {
         $Result = [System.Windows.Forms.MessageBox]::Show(
             "Your screen seems to have a resolution of ${Width}x${Height} pixels.`n`nDo you want this resolution for the screen aspect ratio?",
             $AppFriendlyName, 4, [System.Windows.Forms.MessageBoxIcon]::Question
         )
-        If ($Result -eq "Yes") {
+        if ($Result -eq "Yes") {
             $Content -replace "^monitoraspect=(.*)$", "monitoraspect=$Width/$Height" | Out-File -FilePath $Path -Encoding Ascii
         }
     }
-    Write-Host "Show Install Message"
+    Write-Host -Object "Show Install Message"
     $Result = [System.Windows.Forms.MessageBox]::Show(
        "$AppFriendlyName installed.",
        $AppFriendlyName, 0, [System.Windows.Forms.MessageBoxIcon]::Information
    )
-   Write-Host "Show Balloon Message"
+   Write-Host -Object "Show Balloon Message"
    Show-Balloon -TipTitle $AppFriendlyName -TipText "$AppFriendlyName installed."
 }
