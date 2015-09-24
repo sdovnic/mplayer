@@ -25,7 +25,6 @@ body {
 #content {
 	padding: 1em;
 	background-color: rgba(71, 91, 66, .7);
-	margin: 10px;
 }
 
 @media only screen and (min-width: 560px) {
@@ -37,6 +36,11 @@ body {
 	}
 }
 
+#content p a {
+	text-decoration: underline;
+	color: rgba(245, 245, 245, 1);
+}
+
 #content p {
 	margin: 0;
 	color: rgba(245, 245, 245, 1);
@@ -44,6 +48,11 @@ body {
 	font-size: 1em;
 	line-height: 1.2em;
 	padding-bottom: 1em;
+}
+
+#content p:last-child {
+	padding-bottom: 0px;
+	padding-top: 0.5em;
 }
 
 #content h2 {
@@ -120,5 +129,5 @@ a {
 
 #download {
 	display: none;
-	padding-left: 20px;
+	padding: 0 20px;
 }
