@@ -1,0 +1,5 @@
+.gitattributes export-ignore
+.gitignore export-ignore
+avdump2/ merge=ours
+ffmpeg/ merge=ours
+mplayer/ merge=ours
