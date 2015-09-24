@@ -1,4 +1,4 @@
-.gitattributes export-ignore
+.gitattributes export-ignore merge=ours
 .gitignore export-ignore
 avdump2/ merge=ours
 ffmpeg/ merge=ours
