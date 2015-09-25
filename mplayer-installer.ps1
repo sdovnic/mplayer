@@ -41,9 +41,15 @@ function Add-ShortCut {
             if ($WorkingDirectory) { $Shortcut.WorkingDirectory = $WorkingDirectory; }
             if ($WindowStyle) {
                 Switch ($WindowStyle) {
+<<<<<<< HEAD
                     "Normal" { [Int] $WindowStyleNumerate = 4 };
                     "Minimized" { [Int] $WindowStyleNumerate = 7 };
                     "Maximized" { [Int] $WindowStyleNumerate = 3 };
+=======
+                    "Normal" { [int] $WindowStyleNumerate = 4 };
+                    "Minimized" { [int] $WindowStyleNumerate = 7 };
+                    "Maximized" { [int] $WindowStyleNumerate = 3 };
+>>>>>>> origin/master
                 }
                 $Shortcut.WindowStyle = $WindowStyleNumerate;
             }
