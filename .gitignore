@@ -5,5 +5,7 @@ avdump2/MediaInfo_x86.dll
 contrib/
 mplayer/mplayer/subfont.ttf
 mplayer/mplayer/styles.ass
+mplayer/mplayer/input.conf
+mplayer/mplayer/config
 shell/avdump2.ini
 shell/play-parameter-run.cmd
