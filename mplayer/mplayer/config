@@ -1,3 +1,91 @@
-# Write your default config options here!
+## MPlayer Windows configuration - last rev. 20100716
 
+[default]
+## Manual available at http://www.mplayerhq.hu/DOCS/man/en/mplayer.1.html
 
+## It's better to leave this enabled on Windows, since the console is slow.
+quiet=yes
+
+## Fancy Color Messages
+msgcolor=yes
+
+## Frame dropping
+#framedrop=yes
+
+## drive letter of your DVD
+#dvd-device=d:
+
+## Uncomment this for AC-3 passthrough.
+#afm=hwac3
+
+## AC3 to Stereo
+channels=2
+
+## Software Volume or softvol adjusts you volume using software amplification,
+## not your sound cards hardware volume
+softvol=1
+softvol-max=1000
+
+## Ajust volume differences. *
+a52drc=1
+
+## Multithreaded decoding on supported codec
+#lavdopts=threads=2
+
+## You can use the DirectX or OpenGL video output, default is directx.
+## For Vista or later you should avoid using directx vo, it will
+## disable Aero
+#vo=directx
+vo=direct3d
+
+## video filtering and postprocessing
+## eq is useful if your video card does not support video overlay.
+#vf=pp,eq
+#vf=eq,pp=lb/hb/vb
+
+## Fontconfig
+font=Calibri
+subpos=100
+subfont-text-scale=3
+
+# Find subtitle files. (1: load all subs containing movie name)
+sub-fuzziness=1
+
+# Set font encoding.
+subfont-encoding=unicode
+
+# Set subtitle file encoding.
+unicode=yes
+utf8=yes
+
+slang=ger,eng,und
+alang=ger,jpn,eng,und
+
+## Needs -vo direct3d or -vo gl
+## Makes the DVD menu selection follow the mouse
+mouse-movements=1
+
+## Allows taking screenshots with 's'
+vf=screenshot
+
+## Monitor Aspect
+monitoraspect=1920/1080
+
+## Cache
+cache=8192
+
+## OSD Set autoscale coefficient. (default: 6)
+subfont-osd-scale=4.4
+
+## Disable Menu
+menu=no
+
+## Position window. (50%:50%: center of screen) Enable stylized subtitles
+ass=yes
+embeddedfonts=yes
+ass-styles="C:\Portable\mplayer\mplayer\mplayer\styles.ass"
+
+geometry=50%:50%
+
+#[extension.mp3]
+#msglevel=all=5
