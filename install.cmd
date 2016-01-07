@@ -1,1 +1,1 @@
-@start /min powershell -NoProfile -ExecutionPolicy Bypass .\mplayer-installer.ps1
+@start /min powershell -NoProfile -ExecutionPolicy Bypass -File .\mplayer-installer.ps1
