@@ -3711,6 +3711,7 @@ videocodec ffv210
   info "FFmpeg V210 - 10-bit"
   status untested
   fourcc v210
+  fourcc C210 ; Canopus C210
   driver ffmpeg
   dll v210
   out 422P10
@@ -4282,6 +4283,7 @@ videocodec rawyuy2
   fourcc VYUY YUY2
   fourcc yuvs YUY2
   fourcc DVOO YUY2
+  fourcc YUYV YUY2
   out YUY2
 
 videocodec rawyuv2
@@ -4428,6 +4430,7 @@ videocodec ffrawyuy2
   fourcc VYUY,vyuy
   fourcc yuvs,YUVS
   fourcc DVOO
+  fourcc YUYV
   driver ffmpeg
   dll rawvideo
   out YUY2
@@ -4921,13 +4924,13 @@ audiocodec ffadpcmimawav
   driver ffmpeg
   dll adpcm_ima_wav
 
-audiocodec imaadpcm
-  info "IMA ADPCM"
+audiocodec ffzorkpcm
+  info "FFmpeg PCM Zork audio"
   status working
-  format 0x11
-  fourcc ima4 ; (MOV files)
-  format 0x1100736d ; "ms\x00\x11" (MOV files)
-  driver imaadpcm
+;  format 0x11 ; original format in avi file, conflicts with ima adpcm
+  format 0x116b727a ; 'zrk'0x11, Mplayer internal
+  driver ffmpeg
+  dll pcm_zork
 
 audiocodec ffadpcmms
   info "FFmpeg MS ADPCM audio"
@@ -4936,13 +4939,6 @@ audiocodec ffadpcmms
   format 0x0200736d  ; "ms\x00\x02" (MOV files)
   driver ffmpeg
   dll adpcm_ms
-
-audiocodec msadpcm
-  info "MS ADPCM"
-  status working
-  format 0x2
-  format 0x0200736d  ; "ms\x00\x02" (MOV files)
-  driver msadpcm
 
 audiocodec ffadpcmoki
   info "FFmpeg ADPCM IMA Dialogic OKI"
@@ -4958,6 +4954,13 @@ audiocodec ffadpcmafc
   fourcc "AFC " ; internal MPlayer FourCC
   driver ffmpeg
   dll adpcm_afc
+
+audiocodec ffadpcmaica
+  info "FFmpeg ADPCM Yamaha AICA"
+  status working
+  fourcc "AICA" ; internal MPlayer FourCC
+  driver ffmpeg
+  dll adpcm_aica
 
 audiocodec ffadpcmdtk
   info "FFmpeg ADPCM Nintendo Gamecube DTK"
@@ -4980,13 +4983,6 @@ audiocodec ffadpcmimadk4
               ; registered with Microsoft
   driver ffmpeg
   dll adpcm_ima_dk4
-
-audiocodec dk4adpcm
-  info "Duck DK4 ADPCM (rogue format number)"
-  status working
-  format 0x61 ; This format number was used by Duck Corp. but not officially
-              ; registered with Microsoft
-  driver imaadpcm
 
 audiocodec ffadpcmimadk3
   info "FFmpeg DK3 IMA ADPCM audio"
@@ -5016,13 +5012,6 @@ audiocodec ffadpcmimaeaeacs
   fourcc EACS ; internal MPlayer FourCC
   driver ffmpeg
   dll adpcm_ima_ea_eacs
-
-audiocodec dk3adpcm
-  info "Duck DK3 ADPCM (rogue format number)"
-  status working
-  format 0x62 ; This format number was used by Duck Corp. but not officially
-              ; registered with Microsoft
-  driver dk3adpcm
 
 audiocodec ffroqaudio
   info "Id RoQ File Audio"
@@ -5085,7 +5074,7 @@ audiocodec ffvima
   status working
   fourcc VIMA ; internal MPlayer FourCC
   driver ffmpeg
-  dll vima
+  dll adpcm_vima
 
 audiocodec ffpafaudio
   info "FFmpeg Packed Animation File"
@@ -5100,6 +5089,13 @@ audiocodec ffwssnd1
   fourcc SND1 ; internal MPlayer FourCC
   driver ffmpeg
   dll ws_snd1
+
+audiocodec ffinterplayacm
+  info "FFmpeg Interplay ACM audio"
+  status working
+  format 0x97280301 ; internal MPlayer FourCC
+  driver ffmpeg
+  dll interplay_acm
 
 audiocodec ffinterplaydpcm
   info "FFmpeg Interplay DPCM audio"
@@ -5136,12 +5132,26 @@ audiocodec ffadpcmear3
   driver ffmpeg
   dll adpcm_ea_r3
 
+audiocodec ffadpcmeaxas
+  info "FFmpeg ADPCM Electronic Arts XAS"
+  status working
+  fourcc EXAS ; internal MPlayer FourCC
+  driver ffmpeg
+  dll adpcm_ea_xas
+
 audiocodec ffadpcmeamaxis
   info "FFmpeg EA MAXIS XA ADPCM audio"
   status working
   fourcc ADXA ; internal MPlayer FourCC
   driver ffmpeg
   dll adpcm_ea_maxis_xa
+
+audiocodec ffadpcmpsx
+  info "FFmpeg FFmpeg ADPCM Playstation"
+  status working
+  fourcc APSX ; internal MPlayer FourCC
+  driver ffmpeg
+  dll adpcm_psx
 
 audiocodec ffadpcmxa
   info "FFmpeg XA ADPCM audio"
@@ -5420,6 +5430,20 @@ audiocodec ffwmavoice
   format 0xA
   driver ffmpeg
   dll "wmavoice"
+
+audiocodec ffxma1
+  info "Xbox Media Audio 1 (FFmpeg)"
+  status working
+  format 0x165
+  driver ffmpeg
+  dll xma1
+
+audiocodec ffxma2
+  info "Xbox Media Audio 2 (FFmpeg)"
+  status working
+  format 0x166
+  driver ffmpeg
+  dll xma2
 
 audiocodec ffmac3
   info "Macintosh Audio Compression and Expansion 3:1"
@@ -5748,6 +5772,37 @@ audiocodec musepack
   format 0x2b4d
   driver mpcdec
 
+audiocodec ffdsdlsbf
+  info "FFmpeg DSD (Direct Stream Digital), lsbit first"
+  comment "Does it exist?"
+  status  working
+  fourcc DSDl ; MPlayer internal
+  driver ffmpeg
+  dll dsd_lsbf
+
+audiocodec ffdsdlsbfp
+  info "FFmpeg DSD (Direct Stream Digital), lsbit first, planar"
+  comment "in DSF files"
+  status  working
+  fourcc DSFl ; MPlayer internal
+  driver ffmpeg
+  dll dsd_lsbf_planar
+
+audiocodec ffdsdmsbf
+  info "FFmpeg DSD (Direct Stream Digital), msbit first"
+  status  working
+  fourcc "DSD "
+  driver ffmpeg
+  dll dsd_msbf
+
+audiocodec ffdsdmsbfp
+  info "FFmpeg DSD (Direct Stream Digital), msbit first, planar"
+  comment "in DSF files"
+  status  working
+  fourcc DSFm ; MPlayer internal
+  driver ffmpeg
+  dll dsd_lsbf_planar
+
 audiocodec ffamrnb
   info "AMR Narrowband"
   status working
@@ -5872,6 +5927,27 @@ audiocodec iac25
   driver acm
   dll "iac25_32.ax"
 
+audiocodec ffadpcmsbpro2
+  info "FFmpeg ADPCM Sound Blaster Pro 2-bit"
+  status working
+  format 0x3253 ; 'S2', pseudo id, MPlayer internal
+  driver ffmpeg
+  dll adpcm_sbpro_2
+
+audiocodec ffadpcmsbpro3
+  info "FFmpeg ADPCM Sound Blaster Pro 2.6-bit"
+  status working
+  format 0x3353 ; 'S3', pseudo id, MPlayer internal
+  driver ffmpeg
+  dll adpcm_sbpro_3
+
+audiocodec ffadpcmsbpro4
+  info "FFmpeg ADPCM Sound Blaster Pro 4-bit"
+  status working
+  format 0x3453 ; 'S4', pseudo id, MPlayer internal
+  driver ffmpeg
+  dll adpcm_sbpro_4
+
 audiocodec ffctadp32
   info "FFmpeg Creative ADPCM codec"
   status working
@@ -5893,6 +5969,13 @@ audiocodec ctfs32
   format 0x203 ; FastSpeech 10
   driver acm
   dll "ctfs32.acm"
+
+audiocodec ffdsssp
+  info "FFmpeg Digital Speech Standars - Standard Play  mode (DSS_SP)"
+  status working
+  fourcc DSSs ; MPlayer internal
+  driver ffmpeg
+  dll dss_sp
 
 audiocodec sc4
   info "SC4 : Micronas speech codec (ADPCM, MPman recording)"
@@ -6220,6 +6303,14 @@ audiocodec msnsiren
   format 0x28E
   driver acm
   dll "sirenacm.dll"
+
+audiocodec ffdvaudio
+  info "FFmpeg Ulead DV"
+  status working
+  format 0x215
+  format 0x216
+  driver ffmpeg
+  dll dvaudio
 
 audiocodec uleaddva
   info "Ulead DV ACM"
