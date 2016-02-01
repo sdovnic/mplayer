@@ -17,7 +17,6 @@ function Show-Balloon {
         $FormsNotifyIcon.BalloonTipText = $TipText
         $FormsNotifyIcon.Visible = $True
         $FormsNotifyIcon.ShowBalloonTip(5000)
-        Start-Sleep -Milliseconds 5000
         $FormsNotifyIcon.Dispose()
     }
 }
@@ -142,14 +141,14 @@ if ($args.Length -gt 0) {
         }
         Write-Host -Object "Remove SendTo ShortCut"
         Remove-ShortCut -Link (Join-Path -Path ([environment]::GetFolderPath("SendTo")) -ChildPath "$AppFriendlyName.lnk")
+        Write-Host -Object "Show Balloon Message"
+        Show-Balloon -TipTitle $AppFriendlyName -TipText "MPlayer - Movie Player removed."
         Write-Host -Object "Show Install Message"
         Add-Type -AssemblyName System.Windows.Forms
         $Result = [System.Windows.Forms.MessageBox]::Show(
            "$AppFriendlyName removed.",
            $AppFriendlyName, 0, [System.Windows.Forms.MessageBoxIcon]::Information
         )
-        Write-Host -Object "Show Balloon Message"
-        Show-Balloon -TipTitle $AppFriendlyName -TipText "MPlayer - Movie Player removed."
     }
 } Else {
     Write-Host -Object "Add SendTo ShortCut"
@@ -411,11 +410,11 @@ Style: Default,Calibri,30,&H00FFFFFF,&H000000FF,&H22222200,&H22222200,0,0,0,0,10
             $Content -replace "^monitoraspect=(.*)$", "monitoraspect=$Width/$Height" | Out-File -FilePath $Path -Encoding Ascii
         }
     }
+    Write-Host -Object "Show Balloon Message"
+    Show-Balloon -TipTitle $AppFriendlyName -TipText "$AppFriendlyName installed."
     Write-Host -Object "Show Install Message"
     $Result = [System.Windows.Forms.MessageBox]::Show(
        "$AppFriendlyName installed.",
        $AppFriendlyName, 0, [System.Windows.Forms.MessageBoxIcon]::Information
    )
-   Write-Host -Object "Show Balloon Message"
-   Show-Balloon -TipTitle $AppFriendlyName -TipText "$AppFriendlyName installed."
 }
